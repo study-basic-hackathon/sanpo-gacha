@@ -200,8 +200,8 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="onboarding-page" name="02_初回説明">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="onboarding-page" name="02_トップ画面">
+    <mxGraphModel dx="1540" dy="1387" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="o0" />
         <mxCell id="o1" parent="o0" />
