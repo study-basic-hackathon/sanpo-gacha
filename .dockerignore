@@ -1,0 +1,6 @@
+.next
+node_modules
+AGENTS.md
+CLAUDE.md
+docker-compose.yml
+Dockerfile
