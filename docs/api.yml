@@ -1,0 +1,725 @@
+openapi: 3.0.3
+info:
+  title: 散歩ガチャ
+  description: 散歩で新しい発見を提供してくれるAPIです。
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: ローカル環境
+
+tags:
+  - name: auth
+    description: NextAuthによる認証API
+
+  - name: search-stroll
+    description: 散歩条件から目的地候補を検索するAPI
+
+  - name: history
+    description: 散歩履歴を管理するAPI
+
+  - name: image
+    description: 散歩履歴に紐づく画像を管理するAPI
+
+paths:
+  /api/auth/signin:
+    get:
+      tags: [auth]
+      summary: サインインページ
+      operationId: getSignIn
+      responses:
+        "200":
+          description: サインインフォームを取得
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+    post:
+      tags: [auth]
+      summary: Credentialsでサインイン
+      operationId: signInUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignInPayload"
+      responses:
+        "200":
+          description: サインイン成功、セッションが作成される
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/auth/session:
+    get:
+      tags: [auth]
+      security:
+        - jwtAuth: []
+      summary: セッション情報を取得
+      operationId: getSession
+      responses:
+        "200":
+          description: セッション情報の取得成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/auth/signout:
+    post:
+      tags: [auth]
+      security:
+        - jwtAuth: []
+      summary: サインアウト
+      operationId: signOutUser
+      responses:
+        "200":
+          description: サインアウト成功
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/auth/callback/{provider}:
+    get:
+      tags: [auth]
+      summary: OAuth プロバイダーのコールバック
+      operationId: authCallback
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [github]
+      responses:
+        "302":
+          description: リダイレクト
+        "400":
+          $ref: "#/components/responses/InvalidError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/auth/register:
+    post:
+      tags: [auth]
+      summary: ユーザー登録
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterPayload"
+      responses:
+        "201":
+          description: 登録成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterResponse"
+        "400":
+          $ref: "#/components/responses/InvalidError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/auth/user:
+    put:
+      tags: [auth]
+      security:
+        - jwtAuth: []
+      summary: ユーザー情報を更新
+      operationId: updateUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserPayload"
+      responses:
+        "200":
+          description: ユーザー情報の更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "400":
+          $ref: "#/components/responses/InvalidError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "409":
+          $ref: "#/components/responses/ConflictError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+    delete:
+      tags: [auth]
+      security:
+        - jwtAuth: []
+      summary: ユーザーを削除
+      operationId: deleteUser
+      responses:
+        "204":
+          description: ユーザーの削除成功
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/search-stroll:
+    post:
+      tags: [search-stroll]
+      summary: 散歩条件から目的地候補を検索
+      operationId: searchStroll
+      security:
+        - jwtAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchStrollPayload"
+      responses:
+        "200":
+          description: 目的地候補の検索成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SearchStrollResponse"
+        "400":
+          $ref: "#/components/responses/InvalidError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/history:
+    get:
+      tags: [history]
+      security:
+        - jwtAuth: []
+      summary: 散歩履歴一覧を取得
+      operationId: getHistories
+      responses:
+        "200":
+          description: 散歩履歴一覧の取得成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistoryResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+    post:
+      tags: [history]
+      security:
+        - jwtAuth: []
+      summary: 散歩履歴を登録
+      operationId: createHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateHistoryPayload"
+      responses:
+        "201":
+          description: 散歩履歴の登録成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryResponse"
+        "400":
+          $ref: "#/components/responses/InvalidError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/history/{historyId}:
+    get:
+      tags: [history]
+      security:
+        - jwtAuth: []
+      summary: 散歩履歴を個別取得
+      operationId: getHistory
+      parameters:
+        - $ref: "#/components/parameters/HistoryIdParam"
+      responses:
+        "200":
+          description: 散歩履歴の取得成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+    delete:
+      tags: [history]
+      security:
+        - jwtAuth: []
+      summary: 散歩履歴を削除
+      operationId: deleteHistory
+      parameters:
+        - $ref: "#/components/parameters/HistoryIdParam"
+      responses:
+        "204":
+          description: 散歩履歴の削除成功
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/image:
+    post:
+      tags: [image]
+      security:
+        - jwtAuth: []
+      summary: 画像を登録
+      operationId: createImage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateImagePayload"
+      responses:
+        "201":
+          description: 画像の登録成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImageResponse"
+        "400":
+          $ref: "#/components/responses/InvalidError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+  /api/image/{imageId}:
+    get:
+      tags: [image]
+      security:
+        - jwtAuth: []
+      summary: 画像を個別取得
+      operationId: getImage
+      parameters:
+        - $ref: "#/components/parameters/ImageIdParam"
+      responses:
+        "200":
+          description: 画像情報の取得成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImageResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+    delete:
+      tags: [image]
+      security:
+        - jwtAuth: []
+      summary: 画像を削除
+      operationId: deleteImage
+      parameters:
+        - $ref: "#/components/parameters/ImageIdParam"
+      responses:
+        "204":
+          description: 画像の削除成功
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+
+components:
+  schemas:
+    SignInPayload:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: メールアドレス
+          example: user@example.com
+        password:
+          type: string
+          format: password
+          description: パスワード
+          example: plain-text-password
+
+    RegisterPayload:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: メールアドレス
+          example: user@example.com
+        password:
+          type: string
+          format: password
+          description: パスワード（8文字以上）
+          minLength: 8
+          example: plain-text-password
+
+    RegisterResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 作成されたユーザーのID
+          example: "1"
+
+    UpdateUserPayload:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: メールアドレス
+          example: user@example.com
+        password:
+          type: string
+          format: password
+          description: 新しいパスワード
+          minLength: 8
+          example: new-password
+
+    SessionResponse:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              description: ユーザーID
+              example: "user-123"
+            email:
+              type: string
+              format: email
+              description: メールアドレス
+              example: user@example.com
+        expires:
+          type: string
+          format: date-time
+          description: セッション有効期限
+          example: "2025-03-20T12:00:00Z"
+
+    SearchStrollPayload:
+      type: object
+      required:
+        - latitude
+        - longitude
+        - categories
+        - duration
+      properties:
+        latitude:
+          type: number
+          description: 現在地の緯度
+          example: 35.681236
+
+        longitude:
+          type: number
+          description: 現在地の経度
+          example: 139.767125
+
+        categories:
+          type: string
+          description: 目的地のカテゴリ
+          example: "公園"
+
+        duration:
+          type: number
+          description: 散歩可能時間
+          example: 60
+
+    SearchStrollResponse:
+      type: object
+      required:
+        - placeId
+        - name
+        - meter
+        - scheduledTime
+      properties:
+        placeId:
+          type: string
+          description: Google Places APIの目的地ID
+          example: "ChIJ123456789"
+
+        name:
+          type: string
+          description: 目的地名
+          example: "新宿御苑"
+
+        meter:
+          type: number
+          description: 現在地から目的地までの距離（メートル）
+          example: 2500
+
+        scheduledTime:
+          type: number
+          description: 現在地から目的地までの予定所要時間
+          example: 35
+
+    CreateHistoryPayload:
+      type: object
+      required:
+        - placeId
+        - categories
+        - timeTaken
+        - meter
+        - steps
+        - calories
+      properties:
+        placeId:
+          type: string
+          description: Google Places APIの目的地ID
+          example: "ChIJ123456789"
+
+        categories:
+          type: string
+          description: 目的地のカテゴリ
+          example: "公園"
+
+        timeTaken:
+          type: number
+          description: 散歩にかかった時間
+          example: 45.5
+
+        meter:
+          type: number
+          description: 散歩した距離（メートル）
+          example: 3200
+
+        steps:
+          type: number
+          description: 歩数
+          example: 4200
+
+        calories:
+          type: number
+          description: 消費カロリー
+          example: 180.5
+
+        createdAt:
+          type: string
+          format: date-time
+          description: 散歩履歴の登録日時
+          example: "2026-08-19T10:30:00Z"
+
+    HistoryResponse:
+      type: object
+      required:
+        - historyId
+        - placeId
+        - categories
+        - timeTaken
+        - meter
+        - steps
+        - calories
+        - createdAt
+        - imageIds
+      properties:
+        historyId:
+          type: string
+          description: 散歩履歴のID
+          example: "history-001"
+
+        placeId:
+          type: string
+          description: Google Places APIの目的地ID
+          example: "ChIJ123456789"
+
+        categories:
+          type: string
+          description: 目的地のカテゴリ
+          example: "公園"
+
+        timeTaken:
+          type: number
+          description: 散歩にかかった時間
+          example: 45.5
+
+        meter:
+          type: number
+          description: 散歩した距離（メートル）
+          example: 3200
+
+        steps:
+          type: number
+          description: 歩数
+          example: 4200
+
+        calories:
+          type: number
+          description: 消費カロリー
+          example: 180.5
+
+        createdAt:
+          type: string
+          format: date-time
+          description: 散歩履歴の登録日時
+          example: "2026-08-19T10:30:00Z"
+
+        imageIds:
+          type: array
+          description: 散歩履歴に紐づく画像IDの一覧
+          items:
+            type: string
+          example:
+            - "image-001"
+            - "image-002"
+
+    CreateImagePayload:
+      type: object
+      required:
+        - imageId
+        - historyId
+      properties:
+        imageId:
+          type: string
+          description: 画像のID
+          example: "image-001"
+
+        historyId:
+          type: string
+          description: 画像が紐づく散歩履歴のID
+          example: "history-001"
+
+    ImageResponse:
+      type: object
+      required:
+        - imageId
+        - historyId
+      properties:
+        imageId:
+          type: string
+          description: 画像のID
+          example: "image-001"
+
+        historyId:
+          type: string
+          description: 画像が紐づく散歩履歴のID
+          example: "history-001"
+
+  parameters:
+    HistoryIdParam:
+      name: historyId
+      in: path
+      required: true
+      description: 散歩履歴のID
+      schema:
+        type: string
+
+    ImageIdParam:
+      name: imageId
+      in: path
+      required: true
+      description: 画像のID
+      schema:
+        type: string
+
+  responses:
+    UnexpectedError:
+      description: 予期しないエラー
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "unexpected_error_occurred"
+
+    InvalidError:
+      description: 不正なリクエスト
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "invalid_input"
+
+    UnauthorizedError:
+      description: 認証されてないユーザのリクエスト
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "authentication_required"
+
+    ConflictError:
+      description: 既存リソースの登録リクエスト
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "resource_already_exists"
+
+    NotFoundError:
+      description: リソースが見つからない
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "not_found"
+
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: jwt
+      description: NextAuth JWTセッション
