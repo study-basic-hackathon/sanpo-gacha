@@ -1,233 +1,220 @@
-<mxfile host="Electron" agent="Codex" compressed="false" pages="19">
-  <diagram id="final-pc-flow" name="01_PC版最終画面遷移図">
-    <mxGraphModel dx="1471" dy="894" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+<mxfile host="Electron" agent="Codex" compressed="false" pages="17">
+  <diagram id="pc-final-flow-revised" name="01_PC版最終画面遷移図">
+    <mxGraphModel dx="5008" dy="2212" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
-        <mxCell id="ff0" />
-        <mxCell id="ff1" parent="ff0" />
-        <mxCell id="ff-title" parent="ff1" style="text;html=1;fontSize=28;fontStyle=1;fontColor=#24483A;align=left;" value="さんぽガチャ PC版 最終画面遷移図" vertex="1">
-          <mxGeometry height="45" width="600" x="45" y="20" as="geometry" />
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#173F35;" value="さんぽガチャ PC版｜画面遷移図" vertex="1">
+          <mxGeometry height="40" width="720" x="40" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="lane1" parent="ff1" style="swimlane;html=1;horizontal=1;startSize=35;rounded=1;arcSize=10;fillColor=#FFF8E8;swimlaneFillColor=#FFFCF5;strokeColor=#E3B85B;fontStyle=1;fontColor=#6D5723;" value="初回利用・認証" vertex="1">
-          <mxGeometry height="150" width="1570" x="40" y="85" as="geometry" />
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#5B6B66;" value="主な利用の流れを中央に配置し、初回設定・補助機能・写真操作を分けて表示" vertex="1">
+          <mxGeometry height="24" width="760" x="42" y="58" as="geometry" />
         </mxCell>
-        <mxCell id="lane2" parent="ff1" style="swimlane;html=1;horizontal=1;startSize=35;rounded=1;arcSize=10;fillColor=#E8F2E8;swimlaneFillColor=#F8FCF8;strokeColor=#538467;fontStyle=1;fontColor=#24483A;" value="ホーム・共通メニュー" vertex="1">
-          <mxGeometry height="155" width="1570" x="40" y="255" as="geometry" />
+        <mxCell id="legend-main" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF3E8;strokeColor=#2D7A63;fontColor=#173F35;fontStyle=1;" value="主ルート" vertex="1">
+          <mxGeometry height="30" width="100" x="1160" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="lane3" parent="ff1" style="swimlane;html=1;horizontal=1;startSize=35;rounded=1;arcSize=10;fillColor=#FFF2CC;swimlaneFillColor=#FFFCF2;strokeColor=#C49A31;fontStyle=1;fontColor=#6D5723;" value="散歩先の検索・出発" vertex="1">
-          <mxGeometry height="175" width="1570" x="40" y="430" as="geometry" />
+        <mxCell id="legend-sub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;" value="補助画面" vertex="1">
+          <mxGeometry height="30" width="100" x="1270" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="lane4" parent="ff1" style="swimlane;html=1;horizontal=1;startSize=35;rounded=1;arcSize=10;fillColor=#FDE5E1;swimlaneFillColor=#FFF9F8;strokeColor=#B85450;fontStyle=1;fontColor=#773B37;" value="散歩中" vertex="1">
-          <mxGeometry height="170" width="1570" x="40" y="625" as="geometry" />
+        <mxCell id="legend-state" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#6D5717;dashed=1;" value="確認・状態" vertex="1">
+          <mxGeometry height="30" width="100" x="1380" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="EDUCmM13zgb5gSOtSHV9-0" parent="lane4" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Actor" vertex="1">
-          <mxGeometry height="88" width="32.5" x="700" y="-45" as="geometry" />
+        <mxCell id="legend-back" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#6B7280;" value="破線＝戻る／別操作" vertex="1">
+          <mxGeometry height="30" width="140" x="1490" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="lane5" parent="ff1" style="swimlane;html=1;horizontal=1;startSize=35;rounded=1;arcSize=10;fillColor=#E9DFF2;swimlaneFillColor=#FCFAFD;strokeColor=#8668A0;fontStyle=1;fontColor=#5B416F;" value="散歩後・記録" vertex="1">
-          <mxGeometry height="180" width="1570" x="40" y="815" as="geometry" />
+        <mxCell id="bg-first" parent="1" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontSize=15;fontStyle=1;fontColor=#66521A;fillColor=#FFF9E8;strokeColor=#E6CB76;arcSize=12;" value="初回利用・ログイン" vertex="1">
+          <mxGeometry height="190" width="1580" x="35" y="95" as="geometry" />
         </mxCell>
-        <mxCell id="start" parent="ff1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#24483A;fontColor=#FFFFFF;strokeColor=#24483A;fontSize=15;" value="開始" vertex="1">
-          <mxGeometry height="48" width="80" x="70" y="145" as="geometry" />
+        <mxCell id="bg-main" parent="1" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontSize=15;fontStyle=1;fontColor=#173F35;fillColor=#F3FBF7;strokeColor=#9BCBB9;arcSize=12;" value="基本の散歩ルート" vertex="1">
+          <mxGeometry height="300" width="1580" x="35" y="305" as="geometry" />
         </mxCell>
-        <mxCell id="login2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#538467;fontSize=15;" value="ログイン" vertex="1">
-          <mxGeometry height="60" width="130" x="205" y="138" as="geometry" />
+        <mxCell id="bg-photo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontSize=15;fontStyle=1;fontColor=#6D5717;fillColor=#FFFBF0;strokeColor=#E4C86D;arcSize=12;" value="散歩中の写真操作" vertex="1">
+          <mxGeometry height="225" width="820" x="35" y="625" as="geometry" />
         </mxCell>
-        <mxCell id="judge" parent="ff1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF0B8;strokeColor=#C59625;fontSize=14;" value="初回利用？" vertex="1">
-          <mxGeometry height="80" width="120" x="390" y="128" as="geometry" />
+        <mxCell id="bg-tools" parent="1" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontSize=15;fontStyle=1;fontColor=#26476E;fillColor=#F5F8FF;strokeColor=#A8BDE0;arcSize=12;" value="ホームから使える補助機能" vertex="1">
+          <mxGeometry height="460" width="740" x="875" y="625" as="geometry" />
         </mxCell>
-        <mxCell id="intro2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFF8E8;strokeColor=#E3B85B;fontSize=15;" value="初回説明" vertex="1">
-          <mxGeometry height="60" width="130" x="570" y="138" as="geometry" />
+        <mxCell id="start" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7B8A86;fontStyle=1;fontSize=13;" value="開始" vertex="1">
+          <mxGeometry height="50" width="70" x="70" y="165" as="geometry" />
         </mxCell>
-        <mxCell id="permission2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFF8E8;strokeColor=#E3B85B;fontSize=15;" value="位置情報許可" vertex="1">
-          <mxGeometry height="60" width="145" x="755" y="138" as="geometry" />
+        <mxCell id="login" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF3E8;strokeColor=#2D7A63;fontColor=#173F35;fontStyle=1;fontSize=13;" value="02　ログイン" vertex="1">
+          <mxGeometry height="70" width="145" x="185" y="155" as="geometry" />
         </mxCell>
-        <mxCell id="denied" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#F3F3F3;strokeColor=#999999;fontSize=13;dashed=1;" value="許可しない場合&lt;br&gt;出発地点を手入力" vertex="1">
-          <mxGeometry height="70" width="165" x="965" y="133" as="geometry" />
+        <mxCell id="first-decision" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#6D5717;fontStyle=1;fontSize=12;" value="初回利用？" vertex="1">
+          <mxGeometry height="90" width="105" x="380" y="145" as="geometry" />
         </mxCell>
-        <mxCell id="home2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#D9EAD3;strokeColor=#4F8F66;fontSize=17;fontStyle=1;" value="ホーム" vertex="1">
-          <mxGeometry height="65" width="145" x="690" y="310" as="geometry" />
+        <mxCell id="intro" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="03　初回説明" vertex="1">
+          <mxGeometry height="70" width="145" x="535" y="155" as="geometry" />
         </mxCell>
-        <mxCell id="history2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8668A0;fontSize=15;" value="散歩履歴" vertex="1">
-          <mxGeometry height="60" width="135" x="70" y="310" as="geometry" />
+        <mxCell id="location" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="04　位置情報許可" vertex="1">
+          <mxGeometry height="70" width="160" x="730" y="155" as="geometry" />
         </mxCell>
-        <mxCell id="favorite2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B86472;fontSize=15;" value="お気に入り" vertex="1">
-          <mxGeometry height="60" width="135" x="255" y="310" as="geometry" />
+        <mxCell id="manual" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#6D5717;dashed=1;fontSize=12;" value="許可しない場合&lt;br&gt;出発地点を手入力" vertex="1">
+          <mxGeometry height="90" width="180" x="940" y="145" as="geometry" />
         </mxCell>
-        <mxCell id="stats2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5E88AA;fontSize=14;" value="統計・達成&lt;br&gt;カレンダー" vertex="1">
-          <mxGeometry height="70" width="145" x="440" y="305" as="geometry" />
+        <mxCell id="home-top" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF3E8;strokeColor=#2D7A63;fontColor=#173F35;fontStyle=1;fontSize=14;strokeWidth=2;" value="05　ホーム" vertex="1">
+          <mxGeometry height="70" width="160" x="1215" y="155" as="geometry" />
         </mxCell>
-        <mxCell id="profile2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#888888;fontSize=15;" value="プロフィール" vertex="1">
-          <mxGeometry height="60" width="145" x="1280" y="310" as="geometry" />
+        <mxCell id="home" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF3E8;strokeColor=#2D7A63;fontColor=#173F35;fontStyle=1;fontSize=14;strokeWidth=2;" value="05　ホーム&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;今日の散歩を探す&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="155" x="70" y="415" as="geometry" />
         </mxCell>
-        <mxCell id="search2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#C49A31;fontSize=14;fontStyle=1;" value="検索&lt;br&gt;現在地・気分・散歩時間・カテゴリ" vertex="1">
-          <mxGeometry height="78" width="205" x="160" y="480" as="geometry" />
+        <mxCell id="search" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF3E8;strokeColor=#2D7A63;fontColor=#173F35;fontStyle=1;fontSize=13;strokeWidth=2;" value="06　検索&lt;br&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;現在地・気分・散歩時間・カテゴリ&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="210" x="330" y="405" as="geometry" />
         </mxCell>
-        <mxCell id="results2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#C49A31;fontSize=14;" value="候補地リスト&lt;br&gt;所要時間・案内・地図" vertex="1">
-          <mxGeometry height="78" width="190" x="440" y="480" as="geometry" />
+        <mxCell id="precheck" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#6D5717;fontStyle=1;fontSize=13;strokeWidth=2;" value="07　出発前確認&lt;br&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;場所・時間・位置情報・安全確認&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="210" x="650" y="405" as="geometry" />
         </mxCell>
-        <mxCell id="detail2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=14;" value="候補地詳細&lt;br&gt;名称・カテゴリ・概要・順路" vertex="1">
-          <mxGeometry height="78" width="205" x="705" y="480" as="geometry" />
+        <mxCell id="walking" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF3E8;strokeColor=#2D7A63;fontColor=#173F35;fontStyle=1;fontSize=13;strokeWidth=2;" value="08　&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 14px;&quot;&gt;散歩中画面&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0); font-size: 14px;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 14px;&quot;&gt;候補地リスト・地図・所要時間・現在位置&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="190" x="970" y="405" as="geometry" />
         </mxCell>
-        <mxCell id="prewalk2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFE6D8;strokeColor=#D98265;fontSize=14;" value="出発前確認&lt;br&gt;場所・時間・位置情報・安全確認" vertex="1">
-          <mxGeometry height="78" width="215" x="985" y="480" as="geometry" />
+        <mxCell id="result" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF3E8;strokeColor=#2D7A63;fontColor=#173F35;fontStyle=1;fontSize=13;strokeWidth=2;" value="11　&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 14px;&quot;&gt;到着・結果発表&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0); font-size: 14px;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 14px;&quot;&gt;場所・時間・距離・歩数&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="220" x="1270" y="405" as="geometry" />
         </mxCell>
-        <mxCell id="cancel" parent="ff1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF0B8;strokeColor=#C59625;fontSize=14;" value="開始する？" vertex="1">
-          <mxGeometry height="88" width="125" x="1280" y="475" as="geometry" />
+        <mxCell id="record" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="13　&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 14px; font-weight: 400;&quot;&gt;散歩記録詳細&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0); font-size: 14px; font-weight: 400;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 14px; font-weight: 400;&quot;&gt;写真・ルート・メモ&lt;/span&gt;" vertex="1">
+          <mxGeometry height="55" width="220" x="1270" y="535" as="geometry" />
         </mxCell>
-        <mxCell id="walking2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=14;fontStyle=1;" value="散歩中画面&lt;br&gt;候補地リスト・地図・所要時間・現在位置" vertex="1">
-          <mxGeometry height="78" width="240" x="180" y="675" as="geometry" />
+        <mxCell id="camera" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#6D5717;fontStyle=1;fontSize=13;" value="09写真撮影&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;カメラを起動して撮影&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="105" y="710" as="geometry" />
         </mxCell>
-        <mxCell id="camera2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#E9DFF2;strokeColor=#8668A0;fontSize=15;" value="写真撮影" vertex="1">
-          <mxGeometry height="65" width="145" x="520" y="680" as="geometry" />
+        <mxCell id="photo-check" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#6D5717;fontStyle=1;fontSize=13;" value="10写真確認&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;保存 ／ 撮り直し&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="385" y="710" as="geometry" />
         </mxCell>
-        <mxCell id="photo2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#E9DFF2;strokeColor=#8668A0;fontSize=14;" value="写真確認&lt;br&gt;保存／撮り直し" vertex="1">
-          <mxGeometry height="75" width="160" x="750" y="675" as="geometry" />
+        <mxCell id="photo-note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontColor=#6D5717;dashed=1;fontSize=12;" value="保存した写真は散歩中画面に戻り、&lt;br&gt;到着後に散歩記録へ反映されます。" vertex="1">
+          <mxGeometry height="90" width="175" x="645" y="710" as="geometry" />
         </mxCell>
-        <mxCell id="arrivaljudge" parent="ff1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF0B8;strokeColor=#C59625;fontSize=14;" value="目的地に到着？" vertex="1">
-          <mxGeometry height="88" width="145" x="1040" y="668" as="geometry" />
+        <mxCell id="history" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="12散歩履歴" vertex="1">
+          <mxGeometry height="70" width="145" x="925" y="710" as="geometry" />
         </mxCell>
-        <mxCell id="arrival2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFF0B8;strokeColor=#C59625;fontSize=14;fontStyle=1;" value="到着・結果発表&lt;br&gt;場所・時間・距離・歩数" vertex="1">
-          <mxGeometry height="78" width="190" x="1320" y="675" as="geometry" />
+        <mxCell id="history-detail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="13履歴詳細&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;過去の写真・場所・日時&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="175" x="1120" y="700" as="geometry" />
         </mxCell>
-        <mxCell id="record2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#E9DFF2;strokeColor=#8668A0;fontSize=14;" value="散歩記録詳細&lt;br&gt;写真・ルート・メモ" vertex="1">
-          <mxGeometry height="75" width="185" x="1080" y="870" as="geometry" />
+        <mxCell id="favorite" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="14お気に入り" vertex="1">
+          <mxGeometry height="70" width="145" x="925" y="835" as="geometry" />
         </mxCell>
-        <mxCell id="share2" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFE6D8;strokeColor=#D98265;fontSize=14;" value="共有&lt;br&gt;散歩カード" vertex="1">
-          <mxGeometry height="65" width="145" x="1350" y="875" as="geometry" />
+        <mxCell id="stats" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="15統計・達成カレンダー" vertex="1">
+          <mxGeometry height="70" width="175" x="1120" y="835" as="geometry" />
         </mxCell>
-        <mxCell id="historydetail" parent="ff1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8668A0;fontSize=14;" value="履歴詳細&lt;br&gt;過去の写真・場所・日時" vertex="1">
-          <mxGeometry height="75" width="190" x="130" y="870" as="geometry" />
+        <mxCell id="settings" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="16アカウント設定" vertex="1">
+          <mxGeometry height="70" width="175" x="1345" y="835" as="geometry" />
         </mxCell>
-        <mxCell id="note" parent="ff1" style="text;html=1;fontSize=15;fontStyle=1;fontColor=#24483A;align=left;" value="基本ルート：ホーム → 検索 → 候補地リスト → 候補地詳細 → 出発前確認 → 散歩中 → 到着 → 記録" vertex="1">
-          <mxGeometry height="35" width="830" x="440" y="1025" as="geometry" />
+        <mxCell id="share" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F1FF;strokeColor=#5B7DB1;fontColor=#26476E;fontStyle=1;fontSize=13;" value="17共有&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;散歩カードを作成&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="175" x="1345" y="965" as="geometry" />
         </mxCell>
-        <mxCell id="fe1" edge="1" parent="ff1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="login2" value="">
+        <mxCell id="tools-note" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#5B6B80;" value="※ 補助機能は共通ヘッダー／メニューから移動。&amp;lt;br&amp;gt;お気に入りは保存した場所を閲覧・管理します。" vertex="1">
+          <mxGeometry height="55" width="355" x="940" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;" target="login" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe2" edge="1" parent="ff1" source="login2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="judge">
+        <mxCell id="e2" edge="1" parent="1" source="login" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;" target="first-decision" value="ログイン成功">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe3" edge="1" parent="ff1" source="judge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="intro2" value="はい">
+        <mxCell id="e3" edge="1" parent="1" source="first-decision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;" target="intro" value="はい">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe4" edge="1" parent="ff1" source="intro2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="permission2">
+        <mxCell id="e4" edge="1" parent="1" source="intro" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;" target="location" value="次へ">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe5" edge="1" parent="ff1" source="permission2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="home2" value="許可">
+        <mxCell id="e5" edge="1" parent="1" source="location" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;" target="home-top" value="許可">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe6" edge="1" parent="ff1" source="permission2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#999999;dashed=1;" target="denied" value="許可しない">
+        <mxCell id="e6" edge="1" parent="1" source="location" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#9A7B24;strokeWidth=2;dashed=1;fontSize=11;labelBackgroundColor=#FFFFFF;" target="manual" value="許可しない">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe7" edge="1" parent="ff1" source="denied" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#999999;dashed=1;" target="home2">
+        <mxCell id="e7" edge="1" parent="1" source="manual" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#9A7B24;strokeWidth=2;dashed=1;fontSize=11;labelBackgroundColor=#FFFFFF;" target="home-top" value="入力完了">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe8" edge="1" parent="ff1" source="judge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="home2" value="いいえ">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe9" edge="1" parent="ff1" source="home2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="search2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe10" edge="1" parent="ff1" source="search2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="results2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe11" edge="1" parent="ff1" source="results2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="detail2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe12" edge="1" parent="ff1" source="detail2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="prewalk2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe13" edge="1" parent="ff1" source="prewalk2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="cancel">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe14" edge="1" parent="ff1" source="cancel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="walking2" value="はい">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe15" edge="1" parent="ff1" source="cancel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#999999;dashed=1;" target="detail2" value="戻る">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe16" edge="1" parent="ff1" source="walking2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8668A0;" target="camera2" value="写真を撮る">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe17" edge="1" parent="ff1" source="camera2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8668A0;" target="photo2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe18" edge="1" parent="ff1" source="photo2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8668A0;" target="walking2" value="保存">
-          <mxGeometry relative="1" x="0.0045" y="17" as="geometry">
-            <mxPoint x="5" y="-1" as="offset" />
+        <mxCell id="e8" edge="1" parent="1" source="first-decision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" target="home-top" value="いいえ">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="432" y="260" />
+              <mxPoint x="1295" y="260" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="fe19" edge="1" parent="ff1" source="photo2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#999999;dashed=1;" target="camera2" value="撮り直す">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe20" edge="1" parent="ff1" source="walking2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="arrivaljudge">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe21" edge="1" parent="ff1" source="arrivaljudge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="arrival2" value="はい">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe22" edge="1" parent="ff1" source="arrivaljudge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#999999;dashed=1;" target="walking2" value="まだ">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="fe23" edge="1" parent="ff1" source="arrival2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="record2" value="記録する">
-          <mxGeometry relative="1" x="0.1434" y="-62" as="geometry">
-            <mxPoint as="offset" />
+        <mxCell id="e9" edge="1" parent="1" source="home-top" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="home" value="ホーム表示">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1295" y="290" />
+              <mxPoint x="148" y="290" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="fe24" edge="1" parent="ff1" source="arrival2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#D98265;" target="share2" value="シェア">
+        <mxCell id="m1" edge="1" parent="1" source="home" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;" target="search" value="散歩を探す">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe25" edge="1" parent="ff1" source="record2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#68756D;" target="history2">
+        <mxCell id="m2" edge="1" parent="1" source="search" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;" target="precheck" value="検索結果を確認">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe26" edge="1" parent="ff1" source="home2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8668A0;" target="history2">
+        <mxCell id="m5" edge="1" parent="1" source="precheck" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;" target="walking" value="散歩を始める">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe27" edge="1" parent="ff1" source="home2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#B86472;" target="favorite2">
+        <mxCell id="m6" edge="1" parent="1" source="walking" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;" target="result" value="到着">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe28" edge="1" parent="ff1" source="home2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#5E88AA;" target="stats2">
+        <mxCell id="m7" edge="1" parent="1" source="result" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#2D7A63;strokeWidth=3;fontSize=11;labelBackgroundColor=#FFFFFF;" target="record" value="記録を見る">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe29" edge="1" parent="ff1" source="home2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#888888;" target="profile2">
+        <mxCell id="back1" edge="1" parent="1" source="precheck" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endFill=0;strokeColor=#7B8794;strokeWidth=1.5;dashed=1;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" target="search" value="条件を変更" />
+        <mxCell id="p1" edge="1" parent="1" source="walking" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#9A7B24;strokeWidth=2;dashed=1;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="camera" value="写真を撮る" />
+        <mxCell id="p2" edge="1" parent="1" source="camera" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#9A7B24;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;" target="photo-check" value="撮影する">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe30" edge="1" parent="ff1" source="history2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8668A0;" target="historydetail">
+        <mxCell id="p3" edge="1" parent="1" source="photo-check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#9A7B24;strokeWidth=2;dashed=1;fontSize=11;labelBackgroundColor=#FFFFFF;" target="photo-note" value="保存">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe31" edge="1" parent="ff1" source="favorite2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#B86472;" target="detail2" value="場所を選ぶ">
+        <mxCell id="p4" edge="1" parent="1" source="photo-check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endFill=0;strokeColor=#7B8794;strokeWidth=1.5;dashed=1;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" target="camera" value="撮り直し">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="475" y="825" />
+              <mxPoint x="195" y="825" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5" edge="1" parent="1" source="photo-note" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endFill=0;strokeColor=#7B8794;strokeWidth=1.5;dashed=1;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" target="walking" value="散歩を続ける" />
+        <mxCell id="s1" edge="1" parent="1" source="history" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;" target="history-detail" value="履歴">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" edge="1" parent="1" source="record" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" target="history" value="履歴に保存">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1590" y="563" />
+              <mxPoint x="1590" y="675" />
+              <mxPoint x="1090" y="675" />
+              <mxPoint x="1090" y="745" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s3" edge="1" parent="1" source="record" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" target="share" value="共有する">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1595" y="563" />
+              <mxPoint x="1595" y="1005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="home-tools" edge="1" parent="1" source="home" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#5B7DB1;strokeWidth=1.5;dashed=1;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1;exitY=1;entryX=0;entryY=0;" target="history" value="共通メニュー">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="245" y="590" />
+              <mxPoint x="900" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="menu1" edge="1" parent="1" source="history" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=1.5;dashed=1;" target="favorite" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="menu2" edge="1" parent="1" source="favorite" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=1.5;dashed=1;" target="stats" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="menu3" edge="1" parent="1" source="stats" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5B7DB1;strokeWidth=1.5;dashed=1;" target="settings" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="onboarding-page" name="02_トップ画面">
-    <mxGraphModel dx="1540" dy="1387" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
-      <root>
-        <mxCell id="o0" />
-        <mxCell id="o1" parent="o0" />
-        <mxCell id="o-bg" parent="o1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=#D8CBAA;" value="" vertex="1">
-          <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
-        </mxCell>
-        <mxCell id="o-logo" parent="o1" style="text;html=1;fontSize=20;fontStyle=1;fontColor=#24483A;align=left;" value="🌿 さんぽガチャ" vertex="1">
-          <mxGeometry height="40" width="260" x="80" y="70" as="geometry" />
-        </mxCell>
-        <mxCell id="o-art" parent="o1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DDEDDD;strokeColor=#538467;fontSize=24;fontColor=#24483A;" value="？　→　🌳&lt;br&gt;&lt;br&gt;知らない場所との出会い" vertex="1">
-          <mxGeometry height="260" width="390" x="390" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="o-title" parent="o1" style="text;html=1;fontSize=29;fontStyle=1;fontColor=#24483A;align=center;" value="いつもの散歩を、小さな冒険に。" vertex="1">
-          <mxGeometry height="50" width="680" x="250" y="450" as="geometry" />
-        </mxCell>
-        <mxCell id="o-copy" parent="o1" style="text;html=1;fontSize=16;fontColor=#66736B;align=center;" value="気分・散歩時間・カテゴリを選ぶと、あなたに合った候補地を提案します。" vertex="1">
-          <mxGeometry height="40" width="680" x="250" y="515" as="geometry" />
-        </mxCell>
-        <mxCell id="o-next" parent="o1" style="rounded=1;arcSize=25;whiteSpace=wrap;html=1;fillColor=#24483A;fontColor=#FFFFFF;strokeColor=#24483A;fontSize=16;" value="はじめる　→" vertex="1">
-          <mxGeometry height="55" width="260" x="455" y="610" as="geometry" />
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="login-page" name="03_ログイン">
-    <mxGraphModel dx="1212" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="login-page" name="02_ログイン">
+    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="l0" />
         <mxCell id="l1" parent="l0" />
@@ -248,6 +235,32 @@
         </mxCell>
         <mxCell id="l-register" parent="l1" style="text;html=1;fontSize=14;fontColor=#3c7d55;align=center;" value="アカウントを新規登録" vertex="1">
           <mxGeometry height="30" width="215" x="755" y="525" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="onboarding-page" name="03_初回説明">
+    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="o0" />
+        <mxCell id="o1" parent="o0" />
+        <mxCell id="o-bg" parent="o1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=#D8CBAA;" value="" vertex="1">
+          <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o-logo" parent="o1" style="text;html=1;fontSize=20;fontStyle=1;fontColor=#24483A;align=left;" value="🌿 さんぽガチャ" vertex="1">
+          <mxGeometry height="40" width="260" x="80" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="o-art" parent="o1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DDEDDD;strokeColor=#538467;fontSize=24;fontColor=#24483A;" value="？　→　🌳&lt;br&gt;&lt;br&gt;知らない場所との出会い" vertex="1">
+          <mxGeometry height="260" width="390" x="390" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="o-title" parent="o1" style="text;html=1;fontSize=29;fontStyle=1;fontColor=#24483A;align=center;" value="いつもの散歩を、小さな冒険に。" vertex="1">
+          <mxGeometry height="50" width="680" x="250" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="o-copy" parent="o1" style="text;html=1;fontSize=16;fontColor=#66736B;align=center;" value="気分・散歩時間・カテゴリを選ぶと、あなたに合った候補地を提案します。" vertex="1">
+          <mxGeometry height="40" width="680" x="250" y="515" as="geometry" />
+        </mxCell>
+        <mxCell id="o-next" parent="o1" style="rounded=1;arcSize=25;whiteSpace=wrap;html=1;fillColor=#24483A;fontColor=#FFFFFF;strokeColor=#24483A;fontSize=16;" value="はじめる　→" vertex="1">
+          <mxGeometry height="55" width="260" x="455" y="610" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
@@ -276,14 +289,14 @@
     </mxGraphModel>
   </diagram>
   <diagram id="home-page" name="05_ホーム">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1260" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="h0" />
         <mxCell id="h1" parent="h0" />
         <mxCell id="h-frame" parent="h1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f7f8f5;strokeColor=#666666;" value="" vertex="1">
           <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
-        <mxCell id="h-header" parent="h1" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　プロフィール" vertex="1">
+        <mxCell id="h-header" parent="h1" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　アカウント設定" vertex="1">
           <mxGeometry height="70" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
         <mxCell id="h-hero" parent="h1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eaf4e9;strokeColor=none;align=center;verticalAlign=middle;fontSize=15;" value="&lt;b style=&quot;font-size:26px&quot;&gt;今日、どこへ散歩に行きますか？&lt;/b&gt;&lt;br&gt;&lt;br&gt;時間や気分に合わせて、近くの散歩先を見つけましょう。" vertex="1">
@@ -311,14 +324,14 @@
     </mxGraphModel>
   </diagram>
   <diagram id="search-page" name="06_検索">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1260" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="s0" />
         <mxCell id="s1" parent="s0" />
         <mxCell id="s-frame" parent="s1" style="whiteSpace=wrap;html=1;fillColor=#f7f8f5;strokeColor=#666666;" value="" vertex="1">
           <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
-        <mxCell id="s-header" parent="s1" style="whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　プロフィール" vertex="1">
+        <mxCell id="s-header" parent="s1" style="whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　アカウント設定" vertex="1">
           <mxGeometry height="70" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
         <mxCell id="s-side" parent="s1" style="whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c5cec7;align=left;verticalAlign=top;spacing=25;fontSize=15;" value="&lt;b style=&quot;font-size:20px&quot;&gt;散歩条件&lt;/b&gt;&lt;br&gt;&lt;br&gt;散歩時間&lt;br&gt;○ 15分　● 30分　○ 45分　○ 60分　○時間調整&lt;br&gt;&lt;br&gt;カテゴリ(必ず全部使うではない)&lt;br&gt;☑ 神社・寺　□ 公園　□ カフェ　□ 景色&lt;div&gt;複数選択できる&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
@@ -333,7 +346,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="prewalk-page" name="09_出発前確認">
+  <diagram id="prewalk-page" name="07_出発前確認">
     <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="u0" />
@@ -350,8 +363,8 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="walk-page" name="10_散歩中">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="walk-page" name="08_散歩中">
+    <mxGraphModel dx="1260" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="w0" />
         <mxCell id="w1" parent="w0" />
@@ -373,7 +386,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="camera-page" name="11_写真撮影">
+  <diagram id="camera-page" name="09_写真撮影">
     <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="c0" />
@@ -393,8 +406,8 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="photo-confirm-page" name="12_写真確認">
-    <mxGraphModel dx="1199" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="photo-confirm-page" name="10_写真確認">
+    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="pc0" />
         <mxCell id="pc1" parent="pc0" />
@@ -416,8 +429,8 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="arrival-page" name="13_到着と結果発表">
-    <mxGraphModel dx="1199" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="arrival-page" name="11_到着と結果発表">
+    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="a0" />
         <mxCell id="a1" parent="a0" />
@@ -442,15 +455,15 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="history-page" name="15_散歩履歴">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="history-page" name="12_散歩履歴">
+    <mxGraphModel dx="1260" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="x0" />
         <mxCell id="x1" parent="x0" />
         <mxCell id="x-frame" parent="x1" style="whiteSpace=wrap;html=1;fillColor=#f7f8f5;strokeColor=#666666;" value="" vertex="1">
           <mxGeometry height="720" width="1080" x="45" y="37.5" as="geometry" />
         </mxCell>
-        <mxCell id="x-header" parent="x1" style="whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　プロフィール" vertex="1">
+        <mxCell id="x-header" parent="x1" style="whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　アカウント設定" vertex="1">
           <mxGeometry height="70" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
         <mxCell id="x-title" parent="x1" style="text;html=1;fontSize=25;fontStyle=1;align=left;" value="散歩履歴" vertex="1">
@@ -474,15 +487,15 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="record-detail-page" name="14_散歩記録詳細">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="record-detail-page" name="13_散歩記録詳細">
+    <mxGraphModel dx="1260" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="rd0" />
         <mxCell id="rd1" parent="rd0" />
         <mxCell id="rd-bg" parent="rd1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=#D8CBAA;" value="" vertex="1">
           <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
-        <mxCell id="rd-head" parent="rd1" style="whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=none;align=left;spacingLeft=25;fontColor=#24483A;fontSize=16;fontStyle=1;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　プロフィール" vertex="1">
+        <mxCell id="rd-head" parent="rd1" style="whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=none;align=left;spacingLeft=25;fontColor=#24483A;fontSize=16;fontStyle=1;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;アカウント設定&lt;/span&gt;" vertex="1">
           <mxGeometry height="70" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
         <mxCell id="rd-title" parent="rd1" style="text;html=1;fontSize=25;fontStyle=1;fontColor=#24483A;align=left;" value="← 散歩履歴　　2026年8月9日の散歩" vertex="1">
@@ -506,8 +519,8 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="favorite-page" name="16_お気に入り">
-    <mxGraphModel dx="1199" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="favorite-page" name="14_お気に入り">
+    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="b0" />
         <mxCell id="b1" parent="b0" />
@@ -532,15 +545,15 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="stats-page" name="17_統計">
-    <mxGraphModel dx="1199" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <diagram id="stats-page" name="15_統計">
+    <mxGraphModel dx="1260" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="z0" />
         <mxCell id="z1" parent="z0" />
         <mxCell id="z-bg" parent="z1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=#D8CBAA;" value="" vertex="1">
           <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
-        <mxCell id="z-head" parent="z1" style="whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=none;align=left;spacingLeft=25;fontColor=#24483A;fontSize=16;fontStyle=1;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　プロフィール" vertex="1">
+        <mxCell id="z-head" parent="z1" style="whiteSpace=wrap;html=1;fillColor=#FFF9ED;strokeColor=none;align=left;spacingLeft=25;fontColor=#24483A;fontSize=16;fontStyle=1;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;アカウント設定&lt;/span&gt;" vertex="1">
           <mxGeometry height="70" width="1080" x="40" y="35" as="geometry" />
         </mxCell>
         <mxCell id="z-title" parent="z1" style="text;html=1;fontSize=27;fontStyle=1;fontColor=#24483A;align=left;" value="あなたの散歩記録　　今月の目標：週3回・合計20km" vertex="1">
@@ -564,7 +577,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="profile-page" name="18_アカウント設定">
+  <diagram id="profile-page" name="16_アカウント設定">
     <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="p0" />
@@ -590,7 +603,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="share-page" name="19_共有">
+  <diagram id="share-page" name="17_共有">
     <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="sh0" />
@@ -615,58 +628,6 @@
         </mxCell>
         <mxCell id="sh-share" parent="sh1" style="rounded=1;arcSize=25;whiteSpace=wrap;html=1;fillColor=#F08062;fontColor=#FFFFFF;strokeColor=#D46E52;fontSize=15;" value="共有する" vertex="1">
           <mxGeometry height="48" width="180" x="705" y="660" as="geometry" />
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="detail-page" name="廃棄">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
-      <root>
-        <mxCell id="d0" />
-        <mxCell id="d1" parent="d0" />
-        <mxCell id="d-frame" parent="d1" style="whiteSpace=wrap;html=1;fillColor=#f7f8f5;strokeColor=#666666;" value="" vertex="1">
-          <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
-        </mxCell>
-        <mxCell id="d-header" parent="d1" style="whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　プロフィール" vertex="1">
-          <mxGeometry height="70" width="1080" x="40" y="35" as="geometry" />
-        </mxCell>
-        <mxCell id="d-back" parent="d1" style="text;html=1;fontSize=15;align=left;" value="← 検索結果に戻る" vertex="1">
-          <mxGeometry height="30" width="180" x="75" y="125" as="geometry" />
-        </mxCell>
-        <mxCell id="d-photo" parent="d1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#82a687;fontSize=20;" value="富岡八幡宮の写真" vertex="1">
-          <mxGeometry height="360" width="540" x="75" y="175" as="geometry" />
-        </mxCell>
-        <mxCell id="d-info" parent="d1" style="whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;" value="&lt;font color=&quot;#68746b&quot;&gt;神社・寺&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;font-size:28px&quot;&gt;富岡八幡宮&lt;/b&gt;&lt;br&gt;&lt;br&gt;緑に囲まれた境内をゆっくり散策できます。&lt;br&gt;&lt;br&gt;&lt;b&gt;所要時間：&lt;/b&gt;徒歩20分&lt;br&gt;&lt;b&gt;距離：&lt;/b&gt;1.4km&lt;br&gt;&lt;b&gt;利用時間：&lt;/b&gt;9:00〜17:00&lt;br&gt;&lt;b&gt;おすすめ：&lt;/b&gt;静かに歩きたい日" vertex="1">
-          <mxGeometry height="360" width="390" x="665" y="175" as="geometry" />
-        </mxCell>
-        <mxCell id="d-fav" parent="d1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#829789;fontSize=15;" value="♡ お気に入り" vertex="1">
-          <mxGeometry height="48" width="150" x="665" y="570" as="geometry" />
-        </mxCell>
-        <mxCell id="d-start" parent="d1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3c7d55;fontColor=#ffffff;strokeColor=#2f6544;fontSize=15;" value="ここへ散歩する" vertex="1">
-          <mxGeometry height="48" width="190" x="835" y="570" as="geometry" />
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="results-page" name="廃棄2">
-    <mxGraphModel dx="1200" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
-      <root>
-        <mxCell id="r0" />
-        <mxCell id="r1" parent="r0" />
-        <mxCell id="r-frame" parent="r1" style="whiteSpace=wrap;html=1;fillColor=#f7f8f5;strokeColor=#666666;" value="" vertex="1">
-          <mxGeometry height="720" width="1080" x="40" y="35" as="geometry" />
-        </mxCell>
-        <mxCell id="r-header" parent="r1" style="whiteSpace=wrap;html=1;align=left;spacingLeft=24;fontSize=16;fontStyle=1;fillColor=#ffffff;strokeColor=#b7c2b9;" value="🌿 さんぽガチャ　　ホーム　　散歩履歴　　お気に入り　　統計　　プロフィール" vertex="1">
-          <mxGeometry height="70" width="1080" x="40" y="35" as="geometry" />
-        </mxCell>
-        <mxCell id="r-list" parent="r1" style="whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c5cec7;align=left;verticalAlign=top;spacing=22;fontSize=15;" value="&lt;b style=&quot;font-size:20px&quot;&gt;おすすめ候補 3件&lt;/b&gt;&lt;br&gt;&lt;br&gt;並び替え：おすすめ順 ▼" vertex="1">
-          <mxGeometry height="650" width="400" x="40" y="105" as="geometry" />
-        </mxCell>
-        <mxCell id="r-card2" parent="r1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fbf8;strokeColor=#aab9ad;align=left;spacingLeft=15;fontSize=15;" value="&lt;b&gt;② 木場公園　♡&lt;/b&gt;&lt;br&gt;徒歩28分・2.0km・公園&lt;br&gt;緑の多い広い公園&lt;br&gt;［詳細を見る］" vertex="1">
-          <mxGeometry height="115" width="350" x="60" y="210" as="geometry" />
-        </mxCell>
-        <mxCell id="r-map" parent="r1" style="whiteSpace=wrap;html=1;fillColor=#e8efe2;strokeColor=#9caf9e;fontSize=20;" value="地図&lt;br&gt;&lt;br&gt;　① 富岡八幡宮&lt;br&gt;&lt;br&gt;　　　　　　　　　② 木場公園&lt;br&gt;&lt;br&gt;　　　　③ 川沿いカフェ" vertex="1">
-          <mxGeometry height="650" width="680" x="440" y="105" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
