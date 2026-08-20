@@ -125,3 +125,96 @@
 **散歩履歴詳細画面**
 
 - 散歩履歴一覧
+
+### 6. ER図
+
+```mermaid
+erDiagram
+    Users ||--o{ StrollHistories : "散歩する"
+    Users ||--o{ Accounts : "紐づく"
+    Users ||--o{ Sessions : "保持する"
+    StrollHistories ||--o{ Pictures : "撮影する"
+    StrollHistories ||--|{ StrollHistoryCategories : "分類される"
+    Categories ||--o{ StrollHistoryCategories : "分類する"
+
+    Users {
+        varchar id PK "ID"
+        varchar name "名前"
+        varchar email UK "メールアドレス"
+        datetime emailVerified "メールアドレス検証日時"
+        varchar image "写真"
+        datetime createdAt "作成日時"
+        datetime updatedAt "更新日時"
+    }
+
+    StrollHistories {
+        varchar id PK "id"
+        varchar userId FK "ユーザID"
+        varchar visitedPlaceId "訪れた場所ID"
+        datetime visitedAt "訪れた日時"
+        int strollTime "散歩時間（分）"
+        int steps "歩いた歩数"
+        decimal calories "消費カロリー"
+    }
+
+    Categories {
+        varchar id PK "ID"
+        varchar name "カテゴリ名"
+        datetime createdAt "作成日時"
+    }
+
+    StrollHistoryCategories {
+        varchar strollHistoryId PK,FK "散歩履歴ID"
+        varchar categoryId PK,FK "カテゴリID"
+    }
+
+    Pictures {
+        varchar id PK "ID"
+        varchar strollHistoryId FK "散歩履歴ID"
+        varchar imagePath "画像パス"
+    }
+
+    Accounts {
+        varchar id PK "ID"
+        varchar userId FK "ユーザID"
+        varchar providerType "プロバイダー種別"
+        varchar providerId "プロバイダーID"
+        varchar refreshToken "リフレッシュトークン"
+        varchar accessToken "アクセストークン"
+        datetime accessTokenExpires "アクセストークン期限"
+        datetime createdAt "作成日時"
+        datetime updatedAt "更新日時"
+    }
+
+    Sessions {
+        varchar id PK "id"
+        varchar userId FK "ユーザID"
+        datetime expires "期限"
+        varchar sessionToken UK "セッショントークン"
+        varchar accessToken UK "アクセストークン"
+        datetime createdAt "作成日時"
+        datetime updatedAt "更新日時"
+    }
+
+    VerificationRequests {
+        varchar id PK "id"
+        varchar identifier "識別子"
+        varchar token UK "トークン"
+        datetime expires "期限"
+        datetime createdAt "作成日時"
+        datetime updatedAt "更新日時"
+    }
+```
+
+#### エンティティ一覧
+
+| 論理名 | 物理名 | 説明 |
+| --- | --- | --- |
+| ユーザー | Users | アプリ利用者 |
+| 散歩履歴 | StrollHistories | 1回の散歩の記録 |
+| カテゴリ | Categories | 目的地のカテゴリ |
+| 散歩履歴カテゴリ | StrollHistoryCategories | 散歩履歴とカテゴリの関連 |
+| 写真 | Pictures | 散歩中に撮影した写真 |
+| アカウント | Accounts | 外部認証プロバイダーとの連携情報 |
+| セッション | Sessions | ログインセッション |
+| 認証要求 | VerificationRequests | 認証要求 |
