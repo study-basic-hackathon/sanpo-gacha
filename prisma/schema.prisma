@@ -42,15 +42,16 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
+  id              String          @id @default(cuid())
+  name            String?
+  email           String?         @unique
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  accounts        Account[]
+  sessions        Session[]
+  strollHistories StrollHistory[]
 }
 
 model VerificationRequest {
@@ -62,4 +63,40 @@ model VerificationRequest {
   updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
+}
+
+model StrollHistory {
+  id             String                  @id @default(cuid())
+  userId         String
+  visitedPlaceId String
+  visitedAt      DateTime
+  strollTime     Int
+  steps          Int
+  calories       Decimal                 @db.Decimal(6, 2)
+  user           User                    @relation(fields: [userId], references: [id])
+  pictures       Picture[]
+  categories     StrollHistoryCategory[]
+}
+
+model Category {
+  id              String                  @id @default(cuid())
+  name            String
+  createdAt       DateTime                @default(now())
+  strollHistories StrollHistoryCategory[]
+}
+
+model StrollHistoryCategory {
+  strollHistoryId String
+  categoryId      String
+  strollHistory   StrollHistory @relation(fields: [strollHistoryId], references: [id])
+  category        Category      @relation(fields: [categoryId], references: [id])
+
+  @@id([strollHistoryId, categoryId])
+}
+
+model Picture {
+  id              String        @id @default(cuid())
+  strollHistoryId String
+  imagePath       String
+  strollHistory   StrollHistory @relation(fields: [strollHistoryId], references: [id])
 }
