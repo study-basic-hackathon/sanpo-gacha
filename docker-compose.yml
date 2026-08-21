@@ -19,6 +19,15 @@ services:
       - .:/app
       - node_modules:/app/node_modules
 
+  studio:
+    build: .
+    command: sh -c "npx prisma studio --port 51212 --browser none"
+    ports:
+      - "51212:51212"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
 volumes:
   pgdata:
   node_modules:
