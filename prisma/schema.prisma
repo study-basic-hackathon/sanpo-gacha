@@ -4,14 +4,15 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
-}
-
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/backend/lib/db/generatedPrisma"
+
+
 }
 
 model Account {
@@ -52,6 +53,7 @@ model User {
   accounts        Account[]
   sessions        Session[]
   strollHistories StrollHistory[]
+  passwordHash  String?
 }
 
 model VerificationRequest {
