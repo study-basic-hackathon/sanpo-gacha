@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "StrollHistory" ADD COLUMN "meter" INTEGER NOT NULL DEFAULT 0;

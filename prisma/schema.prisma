@@ -73,6 +73,7 @@ model StrollHistory {
   visitedPlaceId String
   visitedAt      DateTime
   strollTime     Int
+  meter          Int
   steps          Int
   calories       Decimal                 @db.Decimal(6, 2)
   user           User                    @relation(fields: [userId], references: [id])

@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "api-types": "openapi-typescript ./docs/api.yml -o ./src/contracts/api.ts",
     "generate": "docker compose exec app npx prisma generate",
     "migrate:dev": "docker compose exec app npx prisma migrate dev"
@@ -37,7 +39,8 @@
     "prisma": "^7.9.1",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.11"
   },
   "allowScripts": {
     "@prisma/engines@7.9.1": true,
