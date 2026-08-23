@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function StrollPage() {
@@ -6,10 +7,21 @@ export default function StrollPage() {
       <header className="border-b border-[#b7c2b9] bg-white">
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 lg:px-10">
           <Link
-            href="/home"
-            className="text-xl font-bold tracking-wide text-[#285c3d]"
+            href="/"
+            className="flex items-center gap-2.5"
           >
-            🌿 さんぽガチャ
+            <Image
+              src="/sanpo-gacha-logo.png"
+              alt=""
+              width={36}
+              height={36}
+              className="h-9 w-9 object-contain"
+              priority
+            />
+
+            <span className="text-xl font-bold tracking-wide text-[#285c3d]">
+              さんぽガチャ
+            </span>
           </Link>
 
           <p className="text-sm font-semibold text-[#53675a]">

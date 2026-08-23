@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function LocationPermissionPage() {
@@ -16,9 +17,20 @@ export default function LocationPermissionPage() {
       <header className="relative z-10 mx-auto flex h-24 max-w-[1200px] items-center px-8 lg:px-12">
         <Link
           href="/"
-          className="text-xl font-bold tracking-wide text-[#285c3d]"
+          className="flex items-center gap-2.5"
         >
-          🌿 さんぽガチャ
+          <Image
+            src="/sanpo-gacha-logo.png"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain"
+            priority
+          />
+
+          <span className="text-xl font-bold tracking-wide text-[#285c3d]">
+            さんぽガチャ
+          </span>
         </Link>
       </header>
 

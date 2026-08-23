@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import AppHeader from "@/components/layout/AppHeader";
 import { useState } from "react";
 
 type FavoritePlace = {
@@ -82,30 +82,7 @@ export default function FavoritesPage() {
 
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
-      <header className="border-b border-[#d7e1d8] bg-white">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link
-            href="/home"
-            className="text-lg font-bold tracking-wide text-[#285c3d]"
-          >
-            🌿 さんぽガチャ
-          </Link>
-
-          <nav className="flex items-center gap-7 text-sm font-medium text-[#42584a]">
-            <Link href="/home">ホーム</Link>
-            <Link href="/history">散歩履歴</Link>
-            <Link href="/favorites" className="text-[#2f7d50]">
-              お気に入り
-            </Link>
-            <Link href="/statistics">統計</Link>
-            <Link href="/settings">アカウント設定</Link>
-          </nav>
-
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e7f2e8] font-bold text-[#285c3d]">
-            王
-          </div>
-        </div>
-      </header>
+      <AppHeader active="favorites" />
 
       <div className="mx-auto max-w-5xl px-6 py-12">
         <section className="flex items-end justify-between gap-6">

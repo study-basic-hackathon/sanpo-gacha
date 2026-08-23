@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AppHeader from "@/components/layout/AppHeader";
 
 const strollHistory = [
   {
@@ -33,45 +34,7 @@ const strollHistory = [
 export default function HistoryPage() {
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
-      <header className="border-b border-[#b7c2b9] bg-white">
-        <div className="mx-auto flex min-h-20 max-w-[1440px] items-center justify-between gap-8 px-8 lg:px-16">
-          <Link
-            href="/home"
-            className="shrink-0 text-xl font-bold tracking-wide text-[#285c3d]"
-          >
-            🌿 さんぽガチャ
-          </Link>
-
-          <nav className="hidden items-center gap-8 text-sm font-semibold text-[#53675a] lg:flex">
-            <Link href="/home" className="transition hover:text-[#2f6544]">
-              ホーム
-            </Link>
-
-            <Link href="/history" className="text-[#2f6544]">
-              散歩履歴
-            </Link>
-
-            <Link href="/favorites" className="transition hover:text-[#2f6544]">
-              お気に入り
-            </Link>
-
-            <Link
-              href="/statistics"
-              className="transition hover:text-[#2f6544]"
-            >
-              統計
-            </Link>
-
-            <Link href="/settings" className="transition hover:text-[#2f6544]">
-              アカウント設定
-            </Link>
-          </nav>
-
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eaf4e9] font-bold text-[#2f6544]">
-            王
-          </div>
-        </div>
-      </header>
+      <AppHeader active="history" />
 
       <section className="mx-auto max-w-[1200px] px-6 py-12">
         <div>
