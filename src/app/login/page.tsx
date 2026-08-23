@@ -73,15 +73,15 @@ export default function LoginPage() {
               ログイン
             </Link>
 
-            <button
-              type="button"
-              className="mt-6 w-full text-center text-sm font-semibold text-[#3c7d55] hover:underline"
+            <Link
+              href="/register"
+              className="mt-6 block w-full text-center text-sm font-semibold text-[#3c7d55] hover:underline"
             >
               アカウントを新規登録
-            </button>
+            </Link>
 
             <p className="mt-8 text-center text-xs leading-5 text-[#879188]">
-              ※ 現在はモック画面のため、
+              ※ 現在はモック画面のため
               <br />
               実際のログイン処理は行いません。
             </p>
