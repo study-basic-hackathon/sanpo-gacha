@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function StrollPhotoConfirmPage() {
@@ -6,10 +7,21 @@ export default function StrollPhotoConfirmPage() {
       <header className="border-b border-[#c8d1ca] bg-white">
         <div className="mx-auto flex h-20 max-w-[1100px] items-center px-6">
           <Link
-            href="/home"
-            className="text-xl font-bold tracking-wide text-[#285c3d]"
+            href="/"
+            className="flex items-center gap-2.5"
           >
-            🌿 さんぽガチャ
+            <Image
+              src="/sanpo-gacha-logo.png"
+              alt=""
+              width={36}
+              height={36}
+              className="h-9 w-9 object-contain"
+              priority
+            />
+
+            <span className="text-xl font-bold tracking-wide text-[#285c3d]">
+              さんぽガチャ
+            </span>
           </Link>
         </div>
       </header>

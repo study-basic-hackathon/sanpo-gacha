@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function LoginPage() {
@@ -6,9 +7,20 @@ export default function LoginPage() {
       <header className="flex h-20 items-center border-b border-[#b7c2b9] bg-white px-8 lg:px-16">
         <Link
           href="/"
-          className="text-xl font-bold tracking-wide text-[#285c3d]"
+          className="flex items-center gap-2.5"
         >
-          🌿 さんぽガチャ
+          <Image
+            src="/sanpo-gacha-logo.png"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain"
+            priority
+          />
+
+          <span className="text-xl font-bold tracking-wide text-[#285c3d]">
+            さんぽガチャ
+          </span>
         </Link>
       </header>
 
