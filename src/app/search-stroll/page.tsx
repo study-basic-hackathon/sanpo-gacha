@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AppHeader from "@/components/layout/AppHeader";
 
 const durations = ["15分", "30分", "45分", "60分"];
 
@@ -12,45 +13,7 @@ const categories = [
 export default function SearchStrollPage() {
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
-      <header className="border-b border-[#b7c2b9] bg-white">
-        <div className="mx-auto flex min-h-20 max-w-[1440px] items-center justify-between gap-8 px-8 lg:px-16">
-          <Link
-            href="/home"
-            className="shrink-0 text-xl font-bold tracking-wide text-[#285c3d]"
-          >
-            🌿 さんぽガチャ
-          </Link>
-
-          <nav className="hidden items-center gap-8 text-sm font-semibold text-[#53675a] lg:flex">
-            <Link href="/home" className="transition hover:text-[#2f6544]">
-              ホーム
-            </Link>
-
-            <Link href="/history" className="transition hover:text-[#2f6544]">
-              散歩履歴
-            </Link>
-
-            <Link href="/favorites" className="transition hover:text-[#2f6544]">
-              お気に入り
-            </Link>
-
-            <Link
-              href="/statistics"
-              className="transition hover:text-[#2f6544]"
-            >
-              統計
-            </Link>
-
-            <Link href="/settings" className="transition hover:text-[#2f6544]">
-              アカウント設定
-            </Link>
-          </nav>
-
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eaf4e9] font-bold text-[#2f6544]">
-            王
-          </div>
-        </div>
-      </header>
+      <AppHeader />
 
       <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-[1440px] lg:grid-cols-[380px_1fr]">
         <aside className="border-r border-[#d1d9d3] bg-white px-7 py-9 lg:px-9">
