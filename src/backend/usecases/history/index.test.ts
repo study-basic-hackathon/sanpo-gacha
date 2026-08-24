@@ -33,8 +33,11 @@ function strollHistoryRecord(overrides: Record<string, unknown> = {}) {
     meter: 3200,
     steps: 4200,
     calories: 180.5,
-    categories: [{ category: { id: "cat-1", name: "公園" } }],
-    pictures: [{ id: "image-001" }, { id: "image-002" }],
+    categories: [{ category: { name: "公園" } }],
+    pictures: [
+      { imagePath: "/images/history-001/image-001.jpg" },
+      { imagePath: "/images/history-001/image-002.jpg" },
+    ],
     ...overrides,
   };
 }
@@ -76,7 +79,10 @@ describe("getHistories", () => {
         steps: 4200,
         calories: 180.5,
         createdAt: "2026-08-19T10:30:00.000Z",
-        imageIds: ["image-001", "image-002"],
+        imagePaths: [
+          "/images/history-001/image-001.jpg",
+          "/images/history-001/image-002.jpg",
+        ],
       },
     ]);
   });
@@ -117,8 +123,8 @@ describe("getHistories", () => {
     prismaMock.strollHistory.findMany.mockResolvedValue([
       strollHistoryRecord({
         categories: [
-          { category: { id: "cat-1", name: "公園" } },
-          { category: { id: "cat-2", name: "神社" } },
+          { category: { name: "公園" } },
+          { category: { name: "神社" } },
         ],
       }),
     ]);
@@ -128,14 +134,14 @@ describe("getHistories", () => {
     expect(result.value?.[0].categories).toBe("公園,神社");
   });
 
-  it("画像が紐づいていない場合はimageIdsが空配列になる", async () => {
+  it("画像が紐づいていない場合はimagePathsが空配列になる", async () => {
     prismaMock.strollHistory.findMany.mockResolvedValue([
       strollHistoryRecord({ pictures: [] }),
     ]);
 
     const result = await getHistories(USER_ID);
 
-    expect(result.value?.[0].imageIds).toEqual([]);
+    expect(result.value?.[0].imagePaths).toEqual([]);
   });
 
   it("DBエラー時はunexpectedを返す", async () => {
@@ -170,7 +176,10 @@ describe("createHistory", () => {
       steps: 4200,
       calories: 180.5,
       createdAt: "2026-08-19T10:30:00.000Z",
-      imageIds: ["image-001", "image-002"],
+      imagePaths: [
+        "/images/history-001/image-001.jpg",
+        "/images/history-001/image-002.jpg",
+      ],
     });
   });
 

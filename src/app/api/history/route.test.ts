@@ -41,7 +41,7 @@ const historyResponse = {
   steps: 4200,
   calories: 180.5,
   createdAt: "2026-08-19T10:30:00.000Z",
-  imageIds: ["image-001"],
+  imagePaths: ["/images/history-001/image-001.jpg"],
 };
 
 const validBody = {

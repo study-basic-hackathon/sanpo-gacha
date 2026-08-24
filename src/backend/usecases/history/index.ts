@@ -18,8 +18,8 @@ const CATEGORY_SEPARATOR = ",";
 
 /** prisma.strollHistory の取得時に必要な関連データ。 */
 const historyInclude = {
-  categories: { include: { category: true } },
-  pictures: true,
+  categories: { select: { category: { select: { name: true } } } },
+  pictures: { select: { imagePath: true } },
 } as const;
 
 interface StrollHistoryRecord {
@@ -31,7 +31,7 @@ interface StrollHistoryRecord {
   steps: number;
   calories: unknown;
   categories: { category: { name: string } }[];
-  pictures: { id: string }[];
+  pictures: { imagePath: string }[];
 }
 
 function toHistoryResponse(record: StrollHistoryRecord): HistoryResponse {
@@ -46,7 +46,7 @@ function toHistoryResponse(record: StrollHistoryRecord): HistoryResponse {
     steps: record.steps,
     calories: Number(record.calories),
     createdAt: record.visitedAt.toISOString(),
-    imageIds: record.pictures.map((picture) => picture.id),
+    imagePaths: record.pictures.map((picture) => picture.imagePath),
   };
 }
 
