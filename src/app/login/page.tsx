@@ -1,14 +1,69 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { authenticate } from "@/app/lib/authenticate";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+
+    if (name === "email") {
+      setEmail(value);
+    }
+
+    if (name === "password") {
+      setPassword(value);
+    }
+
+    if (loginError) {
+      setLoginError("");
+    }
+  }
+
+  async function handleLogin() {
+    setLoginError("");
+    setIsLoading(true);
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    try {
+      const result = await authenticate({
+        email: normalizedEmail,
+        password,
+      });
+
+      if (!result.success) {
+        setLoginError("メールアドレスまたはパスワードが正しくありません。");
+        return;
+      }
+
+      router.push("/");
+      router.refresh();
+    } catch {
+      setLoginError("ログインに失敗しました。");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void handleLogin();
+  }
+
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
       <header className="flex h-20 items-center border-b border-[#b7c2b9] bg-white px-8 lg:px-16">
-        <Link
-          href="/"
-          className="flex items-center gap-2.5"
-        >
+        <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/sanpo-gacha-logo.png"
             alt=""
@@ -52,38 +107,57 @@ export default function LoginPage() {
               アカウント情報を入力してください。
             </p>
 
-            <div className="mt-8 space-y-6">
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold">
-                  メールアドレス
-                </span>
+            <form onSubmit={handleSubmit} className="mt-8">
+              <div className="space-y-6">
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold">
+                    メールアドレス
+                  </span>
 
-                <input
-                  type="email"
-                  placeholder="example@sanpo.jp"
-                  className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
-                />
-              </label>
+                  <input
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={handleChange}
+                    placeholder="example@sanpo.jp"
+                    autoComplete="email"
+                    className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
+                    disabled={isLoading}
+                  />
+                </label>
 
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold">
-                  パスワード
-                </span>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold">
+                    パスワード
+                  </span>
 
-                <input
-                  type="password"
-                  placeholder="パスワードを入力"
-                  className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
-                />
-              </label>
-            </div>
+                  <input
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={handleChange}
+                    placeholder="パスワードを入力"
+                    autoComplete="current-password"
+                    className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
+                    disabled={isLoading}
+                  />
+                </label>
+              </div>
 
-            <Link
-              href="/home"
-              className="mt-8 flex h-12 w-full items-center justify-center rounded-xl bg-[#3c7d55] font-semibold text-white transition hover:bg-[#2f6544]"
-            >
-              ログイン
-            </Link>
+              {loginError && (
+                <p className="mt-4 text-sm text-red-600" role="alert">
+                  {loginError}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="mt-8 flex h-12 w-full items-center justify-center rounded-xl bg-[#3c7d55] font-semibold text-white transition hover:bg-[#2f6544] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isLoading ? "ログイン中..." : "ログイン"}
+              </button>
+            </form>
 
             <Link
               href="/register"
@@ -91,12 +165,6 @@ export default function LoginPage() {
             >
               アカウントを新規登録
             </Link>
-
-            <p className="mt-8 text-center text-xs leading-5 text-[#879188]">
-              ※ 現在はモック画面のため
-              <br />
-              実際のログイン処理は行いません。
-            </p>
           </div>
         </section>
       </div>

@@ -54,7 +54,11 @@ export const ModelName = {
   Account: 'Account',
   Session: 'Session',
   User: 'User',
-  VerificationRequest: 'VerificationRequest'
+  VerificationRequest: 'VerificationRequest',
+  StrollHistory: 'StrollHistory',
+  Category: 'Category',
+  StrollHistoryCategory: 'StrollHistoryCategory',
+  Picture: 'Picture'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -126,6 +130,45 @@ export const VerificationRequestScalarFieldEnum = {
 } as const
 
 export type VerificationRequestScalarFieldEnum = (typeof VerificationRequestScalarFieldEnum)[keyof typeof VerificationRequestScalarFieldEnum]
+
+
+export const StrollHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  visitedPlaceId: 'visitedPlaceId',
+  visitedAt: 'visitedAt',
+  strollTime: 'strollTime',
+  steps: 'steps',
+  calories: 'calories'
+} as const
+
+export type StrollHistoryScalarFieldEnum = (typeof StrollHistoryScalarFieldEnum)[keyof typeof StrollHistoryScalarFieldEnum]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const StrollHistoryCategoryScalarFieldEnum = {
+  strollHistoryId: 'strollHistoryId',
+  categoryId: 'categoryId'
+} as const
+
+export type StrollHistoryCategoryScalarFieldEnum = (typeof StrollHistoryCategoryScalarFieldEnum)[keyof typeof StrollHistoryCategoryScalarFieldEnum]
+
+
+export const PictureScalarFieldEnum = {
+  id: 'id',
+  strollHistoryId: 'strollHistoryId',
+  imagePath: 'imagePath'
+} as const
+
+export type PictureScalarFieldEnum = (typeof PictureScalarFieldEnum)[keyof typeof PictureScalarFieldEnum]
 
 
 export const SortOrder = {

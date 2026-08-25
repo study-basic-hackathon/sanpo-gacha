@@ -400,7 +400,11 @@ export const ModelName = {
   Account: 'Account',
   Session: 'Session',
   User: 'User',
-  VerificationRequest: 'VerificationRequest'
+  VerificationRequest: 'VerificationRequest',
+  StrollHistory: 'StrollHistory',
+  Category: 'Category',
+  StrollHistoryCategory: 'StrollHistoryCategory',
+  Picture: 'Picture'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "user" | "verificationRequest"
+    modelProps: "account" | "session" | "user" | "verificationRequest" | "strollHistory" | "category" | "strollHistoryCategory" | "picture"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -716,6 +720,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    StrollHistory: {
+      payload: Prisma.$StrollHistoryPayload<ExtArgs>
+      fields: Prisma.StrollHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StrollHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StrollHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.StrollHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StrollHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.StrollHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.StrollHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.StrollHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StrollHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.StrollHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>
+        }
+        update: {
+          args: Prisma.StrollHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.StrollHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StrollHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StrollHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.StrollHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.StrollHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStrollHistory>
+        }
+        groupBy: {
+          args: Prisma.StrollHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StrollHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StrollHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StrollHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    Category: {
+      payload: Prisma.$CategoryPayload<ExtArgs>
+      fields: Prisma.CategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.CategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>
+        }
+        findMany: {
+          args: Prisma.CategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+        }
+        create: {
+          args: Prisma.CategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>
+        }
+        createMany: {
+          args: Prisma.CategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CategoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+        }
+        delete: {
+          args: Prisma.CategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>
+        }
+        update: {
+          args: Prisma.CategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.CategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CategoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.CategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.CategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCategory>
+        }
+        groupBy: {
+          args: Prisma.CategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CategoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    StrollHistoryCategory: {
+      payload: Prisma.$StrollHistoryCategoryPayload<ExtArgs>
+      fields: Prisma.StrollHistoryCategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StrollHistoryCategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StrollHistoryCategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.StrollHistoryCategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StrollHistoryCategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>
+        }
+        findMany: {
+          args: Prisma.StrollHistoryCategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>[]
+        }
+        create: {
+          args: Prisma.StrollHistoryCategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>
+        }
+        createMany: {
+          args: Prisma.StrollHistoryCategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StrollHistoryCategoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>[]
+        }
+        delete: {
+          args: Prisma.StrollHistoryCategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>
+        }
+        update: {
+          args: Prisma.StrollHistoryCategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.StrollHistoryCategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StrollHistoryCategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StrollHistoryCategoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.StrollHistoryCategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StrollHistoryCategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.StrollHistoryCategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStrollHistoryCategory>
+        }
+        groupBy: {
+          args: Prisma.StrollHistoryCategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StrollHistoryCategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StrollHistoryCategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StrollHistoryCategoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    Picture: {
+      payload: Prisma.$PicturePayload<ExtArgs>
+      fields: Prisma.PictureFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PictureFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PictureFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>
+        }
+        findFirst: {
+          args: Prisma.PictureFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PictureFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>
+        }
+        findMany: {
+          args: Prisma.PictureFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>[]
+        }
+        create: {
+          args: Prisma.PictureCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>
+        }
+        createMany: {
+          args: Prisma.PictureCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PictureCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>[]
+        }
+        delete: {
+          args: Prisma.PictureDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>
+        }
+        update: {
+          args: Prisma.PictureUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>
+        }
+        deleteMany: {
+          args: Prisma.PictureDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PictureUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PictureUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>[]
+        }
+        upsert: {
+          args: Prisma.PictureUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PicturePayload>
+        }
+        aggregate: {
+          args: Prisma.PictureAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePicture>
+        }
+        groupBy: {
+          args: Prisma.PictureGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PictureGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PictureCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PictureCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -810,6 +1110,45 @@ export const VerificationRequestScalarFieldEnum = {
 export type VerificationRequestScalarFieldEnum = (typeof VerificationRequestScalarFieldEnum)[keyof typeof VerificationRequestScalarFieldEnum]
 
 
+export const StrollHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  visitedPlaceId: 'visitedPlaceId',
+  visitedAt: 'visitedAt',
+  strollTime: 'strollTime',
+  steps: 'steps',
+  calories: 'calories'
+} as const
+
+export type StrollHistoryScalarFieldEnum = (typeof StrollHistoryScalarFieldEnum)[keyof typeof StrollHistoryScalarFieldEnum]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const StrollHistoryCategoryScalarFieldEnum = {
+  strollHistoryId: 'strollHistoryId',
+  categoryId: 'categoryId'
+} as const
+
+export type StrollHistoryCategoryScalarFieldEnum = (typeof StrollHistoryCategoryScalarFieldEnum)[keyof typeof StrollHistoryCategoryScalarFieldEnum]
+
+
+export const PictureScalarFieldEnum = {
+  id: 'id',
+  strollHistoryId: 'strollHistoryId',
+  imagePath: 'imagePath'
+} as const
+
+export type PictureScalarFieldEnum = (typeof PictureScalarFieldEnum)[keyof typeof PictureScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -879,6 +1218,34 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1036,6 +1403,10 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   user?: Prisma.UserOmit
   verificationRequest?: Prisma.VerificationRequestOmit
+  strollHistory?: Prisma.StrollHistoryOmit
+  category?: Prisma.CategoryOmit
+  strollHistoryCategory?: Prisma.StrollHistoryCategoryOmit
+  picture?: Prisma.PictureOmit
 }
 
 /* Types for Logging */
