@@ -560,7 +560,7 @@ components:
         - steps
         - calories
         - createdAt
-        - imageIds
+        - imagePaths
       properties:
         historyId:
           type: string
@@ -603,14 +603,14 @@ components:
           description: 散歩履歴の登録日時
           example: "2026-08-19T10:30:00Z"
 
-        imageIds:
+        imagePaths:
           type: array
-          description: 散歩履歴に紐づく画像IDの一覧
+          description: 散歩履歴に紐づく画像パスの一覧
           items:
             type: string
           example:
-            - "image-001"
-            - "image-002"
+            - "/images/history-001/image-001.jpg"
+            - "/images/history-001/image-002.jpg"
 
     CreateImagePayload:
       type: object

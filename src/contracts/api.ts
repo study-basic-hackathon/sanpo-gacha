@@ -395,13 +395,13 @@ export interface components {
              */
             createdAt: string;
             /**
-             * @description 散歩履歴に紐づく画像IDの一覧
+             * @description 散歩履歴に紐づく画像パスの一覧
              * @example [
-             *       "image-001",
-             *       "image-002"
+             *       "/images/history-001/image-001.jpg",
+             *       "/images/history-001/image-002.jpg"
              *     ]
              */
-            imageIds: string[];
+            imagePaths: string[];
         };
         CreateImagePayload: {
             /**

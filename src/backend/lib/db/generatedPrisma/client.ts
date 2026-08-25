@@ -61,3 +61,23 @@ export type User = Prisma.UserModel
  * 
  */
 export type VerificationRequest = Prisma.VerificationRequestModel
+/**
+ * Model StrollHistory
+ * 
+ */
+export type StrollHistory = Prisma.StrollHistoryModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model StrollHistoryCategory
+ * 
+ */
+export type StrollHistoryCategory = Prisma.StrollHistoryCategoryModel
+/**
+ * Model Picture
+ * 
+ */
+export type Picture = Prisma.PictureModel
