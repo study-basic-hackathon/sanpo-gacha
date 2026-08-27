@@ -142,6 +142,7 @@ erDiagram
         varchar name "名前"
         varchar email UK "メールアドレス"
         datetime emailVerified "メールアドレス検証日時"
+        varchar passwordHash "パスワードハッシュ"
         varchar image "写真"
         datetime createdAt "作成日時"
         datetime updatedAt "更新日時"
