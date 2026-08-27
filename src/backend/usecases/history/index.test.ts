@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const prismaMock = vi.hoisted(() => ({
   strollHistory: {
     findMany: vi.fn(),
+    findFirst: vi.fn(),
     create: vi.fn(),
   },
   category: {
@@ -17,6 +18,7 @@ vi.mock("@/backend/lib/db/prisma", () => ({ prisma: prismaMock }));
 import {
   createHistory,
   getHistories,
+  getHistory,
   HISTORY_ERROR,
   type CreateHistoryPayload,
 } from "@/backend/usecases/history";
@@ -300,6 +302,121 @@ describe("createHistory", () => {
     prismaMock.strollHistory.create.mockRejectedValue(new Error("db down"));
 
     const result = await createHistory(USER_ID, validPayload());
+
+    expect(result.success).toBe(false);
+    expect(result.error).toBe(HISTORY_ERROR.unexpected);
+  });
+});
+
+describe("getHistory", () => {
+  it("指定したIDの散歩履歴をHistoryResponseに変換して返す", async () => {
+    prismaMock.strollHistory.findFirst.mockResolvedValue(strollHistoryRecord());
+
+    const result = await getHistory(USER_ID, "history-001");
+
+    expect(result.success).toBe(true);
+    expect(result.value).toEqual({
+      historyId: "history-001",
+      placeId: "ChIJ123456789",
+      categories: "公園",
+      timeTaken: 45,
+      meter: 3200,
+      steps: 4200,
+      calories: 180.5,
+      createdAt: "2026-08-19T10:30:00.000Z",
+      imagePaths: [
+        "/images/history-001/image-001.jpg",
+        "/images/history-001/image-002.jpg",
+      ],
+    });
+  });
+
+  it("IDとログインユーザーの両方を条件に検索する", async () => {
+    prismaMock.strollHistory.findFirst.mockResolvedValue(strollHistoryRecord());
+
+    await getHistory(USER_ID, "history-001");
+
+    expect(prismaMock.strollHistory.findFirst).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { id: "history-001", userId: USER_ID },
+      }),
+    );
+  });
+
+  it("該当する履歴が無い場合はnotFoundを返す", async () => {
+    prismaMock.strollHistory.findFirst.mockResolvedValue(null);
+
+    const result = await getHistory(USER_ID, "history-999");
+
+    expect(result.success).toBe(false);
+    expect(result.error).toBe(HISTORY_ERROR.notFound);
+  });
+
+  it("他人の履歴は取得できずnotFoundを返す", async () => {
+    // where に userId を含めるため、他人の履歴は検索結果が null になる。
+    prismaMock.strollHistory.findFirst.mockResolvedValue(null);
+
+    const result = await getHistory("other-user", "history-001");
+
+    expect(prismaMock.strollHistory.findFirst).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { id: "history-001", userId: "other-user" },
+      }),
+    );
+    expect(result.success).toBe(false);
+    expect(result.error).toBe(HISTORY_ERROR.notFound);
+  });
+
+  it.each([
+    ["空文字", ""],
+    ["空白のみ", "   "],
+  ])("historyIdが%sの場合はDBを引かずnotFoundを返す", async (_label, id) => {
+    const result = await getHistory(USER_ID, id);
+
+    expect(result.success).toBe(false);
+    expect(result.error).toBe(HISTORY_ERROR.notFound);
+    expect(prismaMock.strollHistory.findFirst).not.toHaveBeenCalled();
+  });
+
+  it("Decimal型のcaloriesを数値に変換する", async () => {
+    prismaMock.strollHistory.findFirst.mockResolvedValue(
+      strollHistoryRecord({ calories: { toString: () => "180.50" } }),
+    );
+
+    const result = await getHistory(USER_ID, "history-001");
+
+    expect(result.value?.calories).toBe(180.5);
+  });
+
+  it("カテゴリが複数ある場合はカンマ区切りで返す", async () => {
+    prismaMock.strollHistory.findFirst.mockResolvedValue(
+      strollHistoryRecord({
+        categories: [
+          { category: { name: "公園" } },
+          { category: { name: "神社" } },
+        ],
+      }),
+    );
+
+    const result = await getHistory(USER_ID, "history-001");
+
+    expect(result.value?.categories).toBe("公園,神社");
+  });
+
+  it("画像が紐づいていない場合はimagePathsが空配列になる", async () => {
+    prismaMock.strollHistory.findFirst.mockResolvedValue(
+      strollHistoryRecord({ pictures: [] }),
+    );
+
+    const result = await getHistory(USER_ID, "history-001");
+
+    expect(result.value?.imagePaths).toEqual([]);
+  });
+
+  it("DBエラー時はunexpectedを返す", async () => {
+    prismaMock.strollHistory.findFirst.mockRejectedValue(new Error("db down"));
+
+    const result = await getHistory(USER_ID, "history-001");
 
     expect(result.success).toBe(false);
     expect(result.error).toBe(HISTORY_ERROR.unexpected);

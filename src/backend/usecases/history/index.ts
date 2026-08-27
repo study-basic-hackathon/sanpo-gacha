@@ -8,6 +8,7 @@ export type CreateHistoryPayload = components["schemas"]["CreateHistoryPayload"]
 
 export const HISTORY_ERROR = {
   invalidInput: "invalid_input",
+  notFound: "not_found",
   unexpected: "unexpected_error_occurred",
 } as const;
 
@@ -70,6 +71,33 @@ export async function getHistories(
     });
 
     return success(records.map(toHistoryResponse));
+  } catch {
+    return fail(HISTORY_ERROR.unexpected);
+  }
+}
+
+export async function getHistory(
+  userId: string,
+  historyId: string,
+): Promise<Result<HistoryResponse, HistoryError>> {
+  const id = typeof historyId === "string" ? historyId.trim() : "";
+
+  if (!id) {
+    return fail(HISTORY_ERROR.notFound);
+  }
+
+  try {
+    // where に userId を含めることで、他人の履歴は取得できないようにする。
+    const record = await prisma.strollHistory.findFirst({
+      where: { id, userId },
+      include: historyInclude,
+    });
+
+    if (!record) {
+      return fail(HISTORY_ERROR.notFound);
+    }
+
+    return success(toHistoryResponse(record));
   } catch {
     return fail(HISTORY_ERROR.unexpected);
   }
