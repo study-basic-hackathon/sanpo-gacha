@@ -1,4 +1,5 @@
 import { prisma } from "@/backend/lib/db/prisma";
+import { resolvePlaceNames } from "@/backend/lib/places/placeName";
 import type { components } from "@/contracts/api";
 import type { Result } from "@/backend/utils/Result";
 import { success, fail } from "@/backend/utils/Result";
@@ -35,10 +36,14 @@ interface StrollHistoryRecord {
   pictures: { imagePath: string }[];
 }
 
-function toHistoryResponse(record: StrollHistoryRecord): HistoryResponse {
+function toHistoryResponse(
+  record: StrollHistoryRecord,
+  placeNames: Map<string, string>,
+): HistoryResponse {
   return {
     historyId: record.id,
     placeId: record.visitedPlaceId,
+    placeName: placeNames.get(record.visitedPlaceId) ?? "",
     categories: record.categories
       .map(({ category }) => category.name)
       .join(CATEGORY_SEPARATOR),
@@ -49,6 +54,19 @@ function toHistoryResponse(record: StrollHistoryRecord): HistoryResponse {
     createdAt: record.visitedAt.toISOString(),
     imagePaths: record.pictures.map((picture) => picture.imagePath),
   };
+}
+
+/**
+ * 場所名の解決に失敗しても履歴自体は返したいため、失敗時は空のMapにする。
+ */
+async function resolvePlaceNamesSafely(
+  placeIds: string[],
+): Promise<Map<string, string>> {
+  try {
+    return await resolvePlaceNames(placeIds);
+  } catch {
+    return new Map();
+  }
 }
 
 /** 数値として扱えない値（NaN・Infinity・負数・数値以外）を弾く。 */
@@ -70,7 +88,11 @@ export async function getHistories(
       orderBy: { visitedAt: "desc" },
     });
 
-    return success(records.map(toHistoryResponse));
+    const placeNames = await resolvePlaceNamesSafely(
+      records.map((record) => record.visitedPlaceId),
+    );
+
+    return success(records.map((record) => toHistoryResponse(record, placeNames)));
   } catch {
     return fail(HISTORY_ERROR.unexpected);
   }
@@ -97,7 +119,9 @@ export async function getHistory(
       return fail(HISTORY_ERROR.notFound);
     }
 
-    return success(toHistoryResponse(record));
+    const placeNames = await resolvePlaceNamesSafely([record.visitedPlaceId]);
+
+    return success(toHistoryResponse(record, placeNames));
   } catch {
     return fail(HISTORY_ERROR.unexpected);
   }
@@ -152,7 +176,9 @@ export async function createHistory(
       include: historyInclude,
     });
 
-    return success(toHistoryResponse(record));
+    const placeNames = await resolvePlaceNamesSafely([record.visitedPlaceId]);
+
+    return success(toHistoryResponse(record, placeNames));
   } catch {
     return fail(HISTORY_ERROR.unexpected);
   }

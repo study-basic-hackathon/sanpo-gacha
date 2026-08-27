@@ -24,6 +24,44 @@ export function formatVisitedAt(isoDateTime: string): string {
   return formatted.replace(/　/g, " ");
 }
 
+/** ISO8601の日時を「2026/08/19」形式にする。 */
+export function formatVisitedDate(isoDateTime: string): string {
+  const date = new Date(isoDateTime);
+
+  if (Number.isNaN(date.getTime())) {
+    return "-";
+  }
+
+  return new Intl.DateTimeFormat("ja-JP", {
+    timeZone: JAPAN_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
+
+/** ISO8601の日時を「8月19日」形式にする。 */
+export function formatMonthDay(isoDateTime: string): string {
+  const date = new Date(isoDateTime);
+
+  if (Number.isNaN(date.getTime())) {
+    return "-";
+  }
+
+  return new Intl.DateTimeFormat("ja-JP", {
+    timeZone: JAPAN_TIME_ZONE,
+    month: "long",
+    day: "numeric",
+  }).format(date);
+}
+
+/** placeIdから解決できなかった場所名を、画面表示用の文言に置き換える。 */
+export function formatPlaceName(placeName: string): string {
+  const name = placeName.trim();
+
+  return name.length > 0 ? name : "名称未取得の場所";
+}
+
 /** 分単位の散歩時間を「1時間30分」形式にする。 */
 export function formatDuration(minutes: number): string {
   if (!Number.isFinite(minutes) || minutes < 0) {

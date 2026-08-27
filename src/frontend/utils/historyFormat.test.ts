@@ -3,8 +3,11 @@ import {
   formatCalories,
   formatDistance,
   formatDuration,
+  formatMonthDay,
+  formatPlaceName,
   formatSteps,
   formatVisitedAt,
+  formatVisitedDate,
   splitCategories,
 } from "@/frontend/utils/historyFormat";
 
@@ -68,5 +71,35 @@ describe("splitCategories", () => {
 
   it("空文字の場合は空配列を返す", () => {
     expect(splitCategories("")).toEqual([]);
+  });
+});
+
+describe("formatVisitedDate", () => {
+  it("日本時間のスラッシュ区切りの日付にする", () => {
+    expect(formatVisitedDate("2026-08-19T10:30:00.000Z")).toBe("2026/08/19");
+  });
+
+  it("日付として解釈できない場合はハイフンを返す", () => {
+    expect(formatVisitedDate("not-a-date")).toBe("-");
+  });
+});
+
+describe("formatMonthDay", () => {
+  it("日本時間の月日にする", () => {
+    expect(formatMonthDay("2026-08-19T10:30:00.000Z")).toBe("8月19日");
+  });
+
+  it("日付として解釈できない場合はハイフンを返す", () => {
+    expect(formatMonthDay("not-a-date")).toBe("-");
+  });
+});
+
+describe("formatPlaceName", () => {
+  it("場所名をそのまま返す", () => {
+    expect(formatPlaceName("木場公園")).toBe("木場公園");
+  });
+
+  it.each([[""], ["   "]])("場所名が未取得の場合は代替文言を返す", (placeName) => {
+    expect(formatPlaceName(placeName)).toBe("名称未取得の場所");
   });
 });

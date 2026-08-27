@@ -36,3 +36,20 @@ export async function fetchHistory(
 
   return success(data);
 }
+
+/** 散歩履歴の一覧を取得する。 */
+export async function fetchHistories(): Promise<
+  Result<HistoryResponse[], FetchHistoryError>
+> {
+  const { data, response } = await apiClient.GET("/api/history");
+
+  if (!data) {
+    if (response.status === 401) {
+      return fail(FETCH_HISTORY_ERROR.unauthorized);
+    }
+
+    return fail(FETCH_HISTORY_ERROR.unexpected);
+  }
+
+  return success(data);
+}

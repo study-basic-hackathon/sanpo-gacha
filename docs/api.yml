@@ -554,6 +554,7 @@ components:
       required:
         - historyId
         - placeId
+        - placeName
         - categories
         - timeTaken
         - meter
@@ -571,6 +572,11 @@ components:
           type: string
           description: Google Places APIの目的地ID
           example: "ChIJ123456789"
+
+        placeName:
+          type: string
+          description: placeIdから解決した目的地の名称。解決できなかった場合は空文字
+          example: "木場公園"
 
         categories:
           type: string

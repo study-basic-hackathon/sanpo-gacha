@@ -364,6 +364,11 @@ export interface components {
              */
             placeId: string;
             /**
+             * @description placeIdから解決した目的地の名称。解決できなかった場合は空文字
+             * @example 木場公園
+             */
+            placeName: string;
+            /**
              * @description 目的地のカテゴリ
              * @example 公園
              */

@@ -15,6 +15,14 @@ const prismaMock = vi.hoisted(() => ({
 
 vi.mock("@/backend/lib/db/prisma", () => ({ prisma: prismaMock }));
 
+const { resolvePlaceNamesMock } = vi.hoisted(() => ({
+  resolvePlaceNamesMock: vi.fn(),
+}));
+
+vi.mock("@/backend/lib/places/placeName", () => ({
+  resolvePlaceNames: resolvePlaceNamesMock,
+}));
+
 import {
   createHistory,
   getHistories,
@@ -60,6 +68,9 @@ function validPayload(
 
 beforeEach(() => {
   vi.clearAllMocks();
+  resolvePlaceNamesMock.mockResolvedValue(
+    new Map([["ChIJ123456789", "木場公園"]]),
+  );
 });
 
 describe("getHistories", () => {
@@ -75,6 +86,7 @@ describe("getHistories", () => {
       {
         historyId: "history-001",
         placeId: "ChIJ123456789",
+        placeName: "木場公園",
         categories: "公園",
         timeTaken: 45,
         meter: 3200,
@@ -146,6 +158,43 @@ describe("getHistories", () => {
     expect(result.value?.[0].imagePaths).toEqual([]);
   });
 
+  it("取得した履歴のplaceIdをまとめて場所名に変換する", async () => {
+    prismaMock.strollHistory.findMany.mockResolvedValue([
+      strollHistoryRecord(),
+      strollHistoryRecord({ id: "history-002", visitedPlaceId: "ChIJ987" }),
+    ]);
+
+    await getHistories(USER_ID);
+
+    expect(resolvePlaceNamesMock).toHaveBeenCalledWith([
+      "ChIJ123456789",
+      "ChIJ987",
+    ]);
+  });
+
+  it("場所名を解決できなかった履歴のplaceNameは空文字にする", async () => {
+    prismaMock.strollHistory.findMany.mockResolvedValue([
+      strollHistoryRecord(),
+    ]);
+    resolvePlaceNamesMock.mockResolvedValue(new Map());
+
+    const result = await getHistories(USER_ID);
+
+    expect(result.value?.[0].placeName).toBe("");
+  });
+
+  it("場所名の取得に失敗しても履歴一覧は返す", async () => {
+    prismaMock.strollHistory.findMany.mockResolvedValue([
+      strollHistoryRecord(),
+    ]);
+    resolvePlaceNamesMock.mockRejectedValue(new Error("places down"));
+
+    const result = await getHistories(USER_ID);
+
+    expect(result.success).toBe(true);
+    expect(result.value?.[0].placeName).toBe("");
+  });
+
   it("DBエラー時はunexpectedを返す", async () => {
     prismaMock.strollHistory.findMany.mockRejectedValue(new Error("db down"));
 
@@ -172,6 +221,7 @@ describe("createHistory", () => {
     expect(result.value).toEqual({
       historyId: "history-001",
       placeId: "ChIJ123456789",
+      placeName: "木場公園",
       categories: "公園",
       timeTaken: 45,
       meter: 3200,
@@ -318,6 +368,7 @@ describe("getHistory", () => {
     expect(result.value).toEqual({
       historyId: "history-001",
       placeId: "ChIJ123456789",
+      placeName: "木場公園",
       categories: "公園",
       timeTaken: 45,
       meter: 3200,
