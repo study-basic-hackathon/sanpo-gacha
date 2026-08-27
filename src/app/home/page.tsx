@@ -1,38 +1,6 @@
 import Link from "next/link";
 import AppHeader from "@/components/layout/AppHeader";
-
-const strollHistory = [
-  {
-    id: 1,
-    icon: "⛩️",
-    place: "富岡八幡宮",
-    duration: "32分",
-    distance: "2.3 km",
-    category: "神社",
-    date: "8月18日",
-    background: "linear-gradient(135deg, #dcebdc, #b9d5bd)",
-  },
-  {
-    id: 2,
-    icon: "🌳",
-    place: "木場公園",
-    duration: "45分",
-    distance: "3.1 km",
-    category: "公園",
-    date: "8月15日",
-    background: "linear-gradient(135deg, #e8f1d8, #c8dda7)",
-  },
-  {
-    id: 3,
-    icon: "☕",
-    place: "川沿いカフェ",
-    duration: "24分",
-    distance: "1.8 km",
-    category: "カフェ",
-    date: "8月10日",
-    background: "linear-gradient(135deg, #f3e7d5, #dec6a5)",
-  },
-];
+import RecentStrolls from "@/components/home/RecentStrolls";
 
 export default function HomePage() {
   return (
@@ -80,52 +48,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {strollHistory.map((stroll) => (
-            <article
-              key={stroll.id}
-              className="overflow-hidden rounded-2xl border border-[#c5cec7] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-            >
-              <div
-                className="flex h-36 items-center justify-center text-5xl"
-                style={{ background: stroll.background }}
-              >
-                <span aria-hidden="true">{stroll.icon}</span>
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-lg font-bold">{stroll.place}</h3>
-
-                  <span className="shrink-0 text-xs text-[#7a877e]">
-                    {stroll.date}
-                  </span>
-                </div>
-
-                <p className="mt-3 text-sm text-[#607066]">
-                  {stroll.duration}・{stroll.distance}・{stroll.category}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl bg-white p-5 text-center shadow-sm">
-            <p className="text-sm text-[#6e7d73]">今月の散歩</p>
-            <p className="mt-2 text-2xl font-bold text-[#2f6544]">8回</p>
-          </div>
-
-          <div className="rounded-2xl bg-white p-5 text-center shadow-sm">
-            <p className="text-sm text-[#6e7d73]">合計距離</p>
-            <p className="mt-2 text-2xl font-bold text-[#2f6544]">12.4 km</p>
-          </div>
-
-          <div className="rounded-2xl bg-white p-5 text-center shadow-sm">
-            <p className="text-sm text-[#6e7d73]">合計時間</p>
-            <p className="mt-2 text-2xl font-bold text-[#2f6544]">3時間20分</p>
-          </div>
-        </div>
+        <RecentStrolls />
       </section>
     </main>
   );
