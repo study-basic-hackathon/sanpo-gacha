@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
+
 
 export default function SharePage() {
   const params = useParams<{ id: string }>();
@@ -74,10 +76,21 @@ export default function SharePage() {
       <header className="border-b border-[#d7e1d8] bg-white">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
           <Link
-            href="/home"
-            className="text-lg font-bold tracking-wide text-[#285c3d]"
+            href="/"
+            className="flex items-center gap-2.5"
           >
-            🌿 さんぽガチャ
+            <Image
+              src="/sanpo-gacha-logo.png"
+              alt=""
+              width={36}
+              height={36}
+              className="h-9 w-9 object-contain"
+              priority
+            />
+
+            <span className="text-xl font-bold tracking-wide text-[#285c3d]">
+              さんぽガチャ
+            </span>
           </Link>
 
           <Link
