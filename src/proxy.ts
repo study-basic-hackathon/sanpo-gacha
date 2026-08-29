@@ -3,7 +3,12 @@ import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 export async function proxy(req: NextRequest) {
+  const path = req.nextUrl.pathname;
+
   if (process.env.MOCK_MODE === "true") {
+    if (path === "/") {
+      return NextResponse.redirect(new URL("/home", req.url));
+    }
     return NextResponse.next();
   }
 
@@ -13,7 +18,12 @@ export async function proxy(req: NextRequest) {
   });
 
   const isLoggedIn = !!token;
-  const path = req.nextUrl.pathname;
+
+  if (path === "/") {
+    return NextResponse.redirect(
+      new URL(isLoggedIn ? "/home" : "/login", req.url),
+    );
+  }
 
   if (path !== "/login" && path !== "/register" && !isLoggedIn) {
     return NextResponse.redirect(new URL("/login", req.url));
@@ -23,5 +33,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|login|register|.*\\..*).*)"],
+  matcher: ["/", "/((?!api|_next/static|_next/image|favicon.ico|login|register|.*\\..*).*)"],
 };
