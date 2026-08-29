@@ -56,6 +56,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.userId = user.id;
         token.email = user.email;
+        token.name = user.name;
       }
       if (account) {
         token.accessToken = account.access_token;
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.email = token.email;
         session.user.id = token.userId;
+        session.user.name = token.name;
       }
       return session;
     },
