@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/frontend/api/auth";
-import { authenticate } from "../lib/authenticate";
+import { authenticate } from "@/app/lib/authenticate";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -27,7 +27,7 @@ export default function RegisterPage() {
       return;
     }
 
-    if (password.length >= 8) {
+    if (password.length < 8) {
       setRegisterError("パスワードは8文字以上にしてください。");
       setIsLoading(false);
       return;
