@@ -27,9 +27,9 @@ const navigationItems: Array<{
 
 export default function AppHeader({
   active,
-  userName = "王さん",
+  userName = "ユーザさん",
 }: AppHeaderProps) {
-  const avatarText = userName.trim().charAt(0) || "王";
+  const avatarText = userName.trim().charAt(0) || "ユーザさん";
 
   return (
     <header className="border-b border-[#b7c2b9] bg-white">
