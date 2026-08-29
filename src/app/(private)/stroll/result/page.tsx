@@ -168,12 +168,18 @@ export default function StrollResultPage() {
                 {isSaving ? "保存中…" : "散歩を記録する"}
               </button>
 
-              <Link
-                href="/share/1"
-                className="flex h-12 items-center justify-center rounded-full border border-[#829789] bg-white px-6 font-semibold text-[#405a48] transition hover:bg-[#f1f6f2]"
+              {/* 写真を使ったシェアはAPIが未対応のため、準備中として無効にしている。 */}
+              <span
+                title="準備中の機能です"
+                aria-disabled="true"
+                className="flex h-12 cursor-not-allowed items-center justify-center gap-2 rounded-full border border-[#dbe2dc] bg-white px-6 font-semibold text-[#9aa79d]"
               >
                 写真と一緒にシェア
-              </Link>
+
+                <span className="rounded-full bg-[#f1f4f1] px-2 py-0.5 text-[10px] font-semibold">
+                  準備中
+                </span>
+              </span>
             </div>
             {saveError && <p role="alert" className="mt-4 text-center text-sm text-[#b45f52]">{saveError}</p>}
           </div>
