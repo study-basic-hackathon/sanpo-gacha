@@ -27,6 +27,12 @@ export default function RegisterPage() {
       return;
     }
 
+    if (password.length >= 8) {
+      setRegisterError("パスワードは8文字以上にしてください。");
+      setIsLoading(false);
+      return;
+    }
+
     if (password !== passwordConfirmation) {
       setRegisterError("確認用パスワードが一致しません。");
       setIsLoading(false);
