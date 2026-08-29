@@ -31,7 +31,7 @@ beforeEach(() => {
 });
 
 describe("searchStroll", () => {
-  it("直近1か月の訪問先を除外し、時間差が±5分の候補を返す", async () => {
+  it("直近1か月の訪問先を除外し、時間差が±10分の候補を返す", async () => {
     prismaMock.strollHistory.findMany.mockResolvedValue([
       { visitedPlaceId: "visited-place" },
     ]);
@@ -82,7 +82,7 @@ describe("searchStroll", () => {
       "公園",
       35.681236,
       139.767125,
-      2_800,
+      3_200,
     );
   });
 
@@ -116,15 +116,32 @@ describe("searchStroll", () => {
       "神社・寺",
       35.681236,
       139.767125,
-      2_800,
+      3_200,
     );
     expect(searchPlacesMock).toHaveBeenNthCalledWith(
       2,
       "公園",
       35.681236,
       139.767125,
-      2_800,
+      3_200,
     );
+  });
+
+  it("希望時間より10分長い候補を許容する", async () => {
+    searchPlacesMock.mockResolvedValue([
+      // 緯度差は約3.15kmで、徒歩40分相当。
+      { placeId: "ten-minutes-later", name: "少し遠い公園", latitude: 35.70956, longitude: 139.767125 },
+    ]);
+
+    const result = await searchStroll(USER_ID, payload);
+
+    expect(result).toMatchObject({
+      success: true,
+      value: {
+        placeId: "ten-minutes-later",
+        scheduledTime: 40,
+      },
+    });
   });
 
   it("条件に合う候補がない場合はnot_foundを返す", async () => {
