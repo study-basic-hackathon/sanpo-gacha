@@ -94,7 +94,7 @@ export default function SearchStrollPage() {
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
       <AppHeader />
-      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-[1440px] lg:grid-cols-[380px_1fr]">
+      <div className="min-h-[calc(100vh-5rem)]">
         <aside className="border-r border-[#d1d9d3] bg-white px-7 py-9 lg:px-9">
           <p className="text-xs font-semibold tracking-[0.2em] text-[#6d8b74]">STROLL CONDITIONS</p>
           <h1 className="mt-2 text-2xl font-bold text-[#24483a]">散歩条件</h1>
