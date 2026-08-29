@@ -21,10 +21,17 @@ const navigationItems: Array<{
   key: ActiveNavigation;
   href: string;
   label: string;
+  // お気に入りはAPIが未対応のため、準備中として無効にしている。
+  disabled?: boolean;
 }> = [
   { key: "home", href: "/home", label: "ホーム" },
   { key: "history", href: "/history", label: "散歩履歴" },
-  { key: "favorites", href: "/favorites", label: "お気に入り" },
+  {
+    key: "favorites",
+    href: "/favorites",
+    label: "お気に入り",
+    disabled: true,
+  },
   { key: "statistics", href: "/statistics", label: "統計" },
   { key: "settings", href: "/settings", label: "アカウント設定" },
 ];
@@ -66,6 +73,23 @@ export default function AppHeader({
           className="hidden items-center gap-8 text-sm font-semibold text-[#53675a] lg:flex"
         >
           {navigationItems.map((item) => {
+            if (item.disabled) {
+              return (
+                <span
+                  key={item.key}
+                  title="準備中の機能です"
+                  aria-disabled="true"
+                  className="flex cursor-not-allowed items-center gap-2 text-[#9aa79d]"
+                >
+                  {item.label}
+
+                  <span className="rounded-full bg-[#f1f4f1] px-2 py-0.5 text-[10px] font-semibold">
+                    準備中
+                  </span>
+                </span>
+              );
+            }
+
             const isActive = active === item.key;
 
             return (
