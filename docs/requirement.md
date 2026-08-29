@@ -152,6 +152,7 @@ erDiagram
         varchar id PK "id"
         varchar userId FK "ユーザID"
         varchar visitedPlaceId "訪れた場所ID"
+        string placeName "訪れた場所の名前"
         datetime visitedAt "訪れた日時"
         int strollTime "散歩時間（分）"
         int steps "歩いた歩数"
@@ -209,13 +210,13 @@ erDiagram
 
 #### エンティティ一覧
 
-| 論理名 | 物理名 | 説明 |
-| --- | --- | --- |
-| ユーザー | Users | アプリ利用者 |
-| 散歩履歴 | StrollHistories | 1回の散歩の記録 |
-| カテゴリ | Categories | 目的地のカテゴリ |
-| 散歩履歴カテゴリ | StrollHistoryCategories | 散歩履歴とカテゴリの関連 |
-| 写真 | Pictures | 散歩中に撮影した写真 |
-| アカウント | Accounts | 外部認証プロバイダーとの連携情報 |
-| セッション | Sessions | ログインセッション |
-| 認証要求 | VerificationRequests | 認証要求 |
+| 論理名           | 物理名                  | 説明                             |
+| ---------------- | ----------------------- | -------------------------------- |
+| ユーザー         | Users                   | アプリ利用者                     |
+| 散歩履歴         | StrollHistories         | 1回の散歩の記録                  |
+| カテゴリ         | Categories              | 目的地のカテゴリ                 |
+| 散歩履歴カテゴリ | StrollHistoryCategories | 散歩履歴とカテゴリの関連         |
+| 写真             | Pictures                | 散歩中に撮影した写真             |
+| アカウント       | Accounts                | 外部認証プロバイダーとの連携情報 |
+| セッション       | Sessions                | ログインセッション               |
+| 認証要求         | VerificationRequests    | 認証要求                         |

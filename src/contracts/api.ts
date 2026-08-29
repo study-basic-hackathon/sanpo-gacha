@@ -125,6 +125,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/map": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 徒歩ルート地図を表示 */
+        get: operations["getWalkingMap"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/history": {
         parameters: {
             query?: never;
@@ -282,7 +299,7 @@ export interface components {
              */
             longitude: number;
             /**
-             * @description 目的地のカテゴリ
+             * @description 目的地のカテゴリ（複数指定する場合はカンマ区切り）
              * @example 公園
              */
             categories: string;
@@ -313,6 +330,16 @@ export interface components {
              * @example 35
              */
             scheduledTime: number;
+            /**
+             * @description 目的地の緯度
+             * @example 35.689634
+             */
+            latitude: number;
+            /**
+             * @description 目的地の経度
+             * @example 139.692101
+             */
+            longitude: number;
         };
         CreateHistoryPayload: {
             /**
@@ -320,6 +347,11 @@ export interface components {
              * @example ChIJ123456789
              */
             placeId: string;
+            /**
+             * @description 検索結果で取得した目的地名
+             * @example 木場公園
+             */
+            placeName: string;
             /**
              * @description 目的地のカテゴリ
              * @example 公園
@@ -364,7 +396,7 @@ export interface components {
              */
             placeId: string;
             /**
-             * @description placeIdから解決した目的地の名称。解決できなかった場合は空文字
+             * @description 保存済みの目的地名。旧データなど未保存の場合は空文字
              * @example 木場公園
              */
             placeName: string;
@@ -710,12 +742,64 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SearchStrollResponse"][];
+                    "application/json": components["schemas"]["SearchStrollResponse"];
                 };
             };
             400: components["responses"]["InvalidError"];
             401: components["responses"]["UnauthorizedError"];
+            404: components["responses"]["NotFoundError"];
             500: components["responses"]["UnexpectedError"];
+        };
+    };
+    getWalkingMap: {
+        parameters: {
+            query: {
+                /**
+                 * @description 現在地の緯度
+                 * @example 35.681236
+                 */
+                originLat: number;
+                /**
+                 * @description 現在地の経度
+                 * @example 139.767125
+                 */
+                originLng: number;
+                /**
+                 * @description 目的地の緯度
+                 * @example 35.689634
+                 */
+                destinationLat: number;
+                /**
+                 * @description 目的地の経度
+                 * @example 139.692101
+                 */
+                destinationLng: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Google Maps Embed API の徒歩ルート地図へリダイレクト */
+            307: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description 座標または地図用 API キーが不正・未設定 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @example map_unavailable */
+                        message?: string;
+                    };
+                };
+            };
         };
     };
     getHistories: {

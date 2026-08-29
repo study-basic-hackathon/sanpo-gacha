@@ -1,26 +1,66 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useRouter } from "next/navigation";
+import { createHistory } from "@/frontend/api/history";
+import { loadSearchStrollResults, type SearchStrollCandidate } from "@/frontend/utils/searchStrollResults";
+import { getFinalStrollSummary, type StrollSummary } from "@/frontend/utils/strollProgress";
 
-const results = [
-  {
-    value: "24分",
-    label: "歩いた時間",
-  },
-  {
-    value: "1.6 km",
-    label: "距離",
-  },
-  {
-    value: "2,340歩",
-    label: "歩数",
-  },
-  {
-    value: "85 kcal",
-    label: "消費",
-  },
-];
+const AVERAGE_STEPS_PER_MINUTE = 100;
+const AVERAGE_CALORIES_PER_MINUTE = 3.5;
 
 export default function StrollResultPage() {
+  const router = useRouter();
+  const destination = useSyncExternalStore<SearchStrollCandidate | null>(
+    () => () => {},
+    () => loadSearchStrollResults()[0] ?? null,
+    () => null,
+  );
+  const [summary, setSummary] = useState<StrollSummary>({ elapsedSeconds: 0, meter: 0 });
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const results = useMemo(() => {
+    const elapsedMinutes = summary.elapsedSeconds / 60;
+    const steps = Math.round(elapsedMinutes * AVERAGE_STEPS_PER_MINUTE);
+    const calories = Math.round(elapsedMinutes * AVERAGE_CALORIES_PER_MINUTE);
+
+    return [
+      { value: `${Math.floor(elapsedMinutes)}分`, label: "歩いた時間" },
+      { value: `${summary.meter.toLocaleString("ja-JP")} m`, label: "距離" },
+      { value: `${steps.toLocaleString("ja-JP")}歩`, label: "歩数（目安）" },
+      { value: `${calories} kcal`, label: "消費（目安）" },
+    ];
+  }, [summary]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setSummary(getFinalStrollSummary()));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  async function handleSave() {
+    if (!destination) return;
+    setIsSaving(true);
+    setSaveError(null);
+    const elapsedMinutes = summary.elapsedSeconds / 60;
+    const result = await createHistory({
+      placeId: destination.placeId,
+      placeName: destination.name,
+      categories: destination.category,
+      timeTaken: elapsedMinutes,
+      meter: summary.meter,
+      steps: Math.round(elapsedMinutes * AVERAGE_STEPS_PER_MINUTE),
+      calories: Math.round(elapsedMinutes * AVERAGE_CALORIES_PER_MINUTE),
+    });
+    if (!result.success) {
+      setSaveError("散歩記録の保存に失敗しました。");
+      setIsSaving(false);
+      return;
+    }
+    router.push(`/history/${result.value.historyId}`);
+  }
+
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
       <header className="border-b border-[#c8d1ca] bg-white">
@@ -79,11 +119,11 @@ export default function StrollResultPage() {
 
               <div>
                 <p className="text-sm text-[#66736b]">
-                  神社・寺
+                  {destination?.category ?? "カテゴリ未設定"}
                 </p>
 
                 <h2 className="mt-1 text-2xl font-bold text-[#24483a]">
-                  富岡八幡宮
+                  {destination?.name ?? "目的地未設定"}
                 </h2>
               </div>
             </div>
@@ -119,12 +159,14 @@ export default function StrollResultPage() {
 
           <div className="border-t border-[#dce3de] px-6 py-7 sm:px-10">
             <div className="grid gap-4 sm:grid-cols-2">
-              <Link
-                href="/history/1"
+              <button
+                type="button"
+                onClick={handleSave}
+                disabled={!destination || isSaving}
                 className="flex h-12 items-center justify-center rounded-full bg-[#24483a] px-6 font-semibold text-white transition hover:bg-[#19382c]"
               >
-                散歩を記録する
-              </Link>
+                {isSaving ? "保存中…" : "散歩を記録する"}
+              </button>
 
               <Link
                 href="/share/1"
@@ -133,6 +175,7 @@ export default function StrollResultPage() {
                 写真と一緒にシェア
               </Link>
             </div>
+            {saveError && <p role="alert" className="mt-4 text-center text-sm text-[#b45f52]">{saveError}</p>}
           </div>
         </div>
       </section>

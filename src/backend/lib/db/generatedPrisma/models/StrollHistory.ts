@@ -44,6 +44,7 @@ export type StrollHistoryMinAggregateOutputType = {
   id: string | null
   userId: string | null
   visitedPlaceId: string | null
+  placeName: string | null
   visitedAt: Date | null
   strollTime: number | null
   meter: number | null
@@ -55,6 +56,7 @@ export type StrollHistoryMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   visitedPlaceId: string | null
+  placeName: string | null
   visitedAt: Date | null
   strollTime: number | null
   meter: number | null
@@ -66,6 +68,7 @@ export type StrollHistoryCountAggregateOutputType = {
   id: number
   userId: number
   visitedPlaceId: number
+  placeName: number
   visitedAt: number
   strollTime: number
   meter: number
@@ -93,6 +96,7 @@ export type StrollHistoryMinAggregateInputType = {
   id?: true
   userId?: true
   visitedPlaceId?: true
+  placeName?: true
   visitedAt?: true
   strollTime?: true
   meter?: true
@@ -104,6 +108,7 @@ export type StrollHistoryMaxAggregateInputType = {
   id?: true
   userId?: true
   visitedPlaceId?: true
+  placeName?: true
   visitedAt?: true
   strollTime?: true
   meter?: true
@@ -115,6 +120,7 @@ export type StrollHistoryCountAggregateInputType = {
   id?: true
   userId?: true
   visitedPlaceId?: true
+  placeName?: true
   visitedAt?: true
   strollTime?: true
   meter?: true
@@ -213,6 +219,7 @@ export type StrollHistoryGroupByOutputType = {
   id: string
   userId: string
   visitedPlaceId: string
+  placeName: string | null
   visitedAt: Date
   strollTime: number
   meter: number
@@ -247,6 +254,7 @@ export type StrollHistoryWhereInput = {
   id?: Prisma.StringFilter<"StrollHistory"> | string
   userId?: Prisma.StringFilter<"StrollHistory"> | string
   visitedPlaceId?: Prisma.StringFilter<"StrollHistory"> | string
+  placeName?: Prisma.StringNullableFilter<"StrollHistory"> | string | null
   visitedAt?: Prisma.DateTimeFilter<"StrollHistory"> | Date | string
   strollTime?: Prisma.IntFilter<"StrollHistory"> | number
   meter?: Prisma.IntFilter<"StrollHistory"> | number
@@ -261,6 +269,7 @@ export type StrollHistoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   visitedPlaceId?: Prisma.SortOrder
+  placeName?: Prisma.SortOrderInput | Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
   strollTime?: Prisma.SortOrder
   meter?: Prisma.SortOrder
@@ -278,6 +287,7 @@ export type StrollHistoryWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.StrollHistoryWhereInput | Prisma.StrollHistoryWhereInput[]
   userId?: Prisma.StringFilter<"StrollHistory"> | string
   visitedPlaceId?: Prisma.StringFilter<"StrollHistory"> | string
+  placeName?: Prisma.StringNullableFilter<"StrollHistory"> | string | null
   visitedAt?: Prisma.DateTimeFilter<"StrollHistory"> | Date | string
   strollTime?: Prisma.IntFilter<"StrollHistory"> | number
   meter?: Prisma.IntFilter<"StrollHistory"> | number
@@ -292,6 +302,7 @@ export type StrollHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   visitedPlaceId?: Prisma.SortOrder
+  placeName?: Prisma.SortOrderInput | Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
   strollTime?: Prisma.SortOrder
   meter?: Prisma.SortOrder
@@ -311,6 +322,7 @@ export type StrollHistoryScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"StrollHistory"> | string
   userId?: Prisma.StringWithAggregatesFilter<"StrollHistory"> | string
   visitedPlaceId?: Prisma.StringWithAggregatesFilter<"StrollHistory"> | string
+  placeName?: Prisma.StringNullableWithAggregatesFilter<"StrollHistory"> | string | null
   visitedAt?: Prisma.DateTimeWithAggregatesFilter<"StrollHistory"> | Date | string
   strollTime?: Prisma.IntWithAggregatesFilter<"StrollHistory"> | number
   meter?: Prisma.IntWithAggregatesFilter<"StrollHistory"> | number
@@ -321,6 +333,7 @@ export type StrollHistoryScalarWhereWithAggregatesInput = {
 export type StrollHistoryCreateInput = {
   id?: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -335,6 +348,7 @@ export type StrollHistoryUncheckedCreateInput = {
   id?: string
   userId: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -347,6 +361,7 @@ export type StrollHistoryUncheckedCreateInput = {
 export type StrollHistoryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -361,6 +376,7 @@ export type StrollHistoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -374,6 +390,7 @@ export type StrollHistoryCreateManyInput = {
   id?: string
   userId: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -384,6 +401,7 @@ export type StrollHistoryCreateManyInput = {
 export type StrollHistoryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -395,6 +413,7 @@ export type StrollHistoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -416,6 +435,7 @@ export type StrollHistoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   visitedPlaceId?: Prisma.SortOrder
+  placeName?: Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
   strollTime?: Prisma.SortOrder
   meter?: Prisma.SortOrder
@@ -434,6 +454,7 @@ export type StrollHistoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   visitedPlaceId?: Prisma.SortOrder
+  placeName?: Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
   strollTime?: Prisma.SortOrder
   meter?: Prisma.SortOrder
@@ -445,6 +466,7 @@ export type StrollHistoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   visitedPlaceId?: Prisma.SortOrder
+  placeName?: Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
   strollTime?: Prisma.SortOrder
   meter?: Prisma.SortOrder
@@ -553,6 +575,7 @@ export type StrollHistoryUpdateOneRequiredWithoutPicturesNestedInput = {
 export type StrollHistoryCreateWithoutUserInput = {
   id?: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -565,6 +588,7 @@ export type StrollHistoryCreateWithoutUserInput = {
 export type StrollHistoryUncheckedCreateWithoutUserInput = {
   id?: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -607,6 +631,7 @@ export type StrollHistoryScalarWhereInput = {
   id?: Prisma.StringFilter<"StrollHistory"> | string
   userId?: Prisma.StringFilter<"StrollHistory"> | string
   visitedPlaceId?: Prisma.StringFilter<"StrollHistory"> | string
+  placeName?: Prisma.StringNullableFilter<"StrollHistory"> | string | null
   visitedAt?: Prisma.DateTimeFilter<"StrollHistory"> | Date | string
   strollTime?: Prisma.IntFilter<"StrollHistory"> | number
   meter?: Prisma.IntFilter<"StrollHistory"> | number
@@ -617,6 +642,7 @@ export type StrollHistoryScalarWhereInput = {
 export type StrollHistoryCreateWithoutCategoriesInput = {
   id?: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -630,6 +656,7 @@ export type StrollHistoryUncheckedCreateWithoutCategoriesInput = {
   id?: string
   userId: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -657,6 +684,7 @@ export type StrollHistoryUpdateToOneWithWhereWithoutCategoriesInput = {
 export type StrollHistoryUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -670,6 +698,7 @@ export type StrollHistoryUncheckedUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -681,6 +710,7 @@ export type StrollHistoryUncheckedUpdateWithoutCategoriesInput = {
 export type StrollHistoryCreateWithoutPicturesInput = {
   id?: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -694,6 +724,7 @@ export type StrollHistoryUncheckedCreateWithoutPicturesInput = {
   id?: string
   userId: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -721,6 +752,7 @@ export type StrollHistoryUpdateToOneWithWhereWithoutPicturesInput = {
 export type StrollHistoryUpdateWithoutPicturesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -734,6 +766,7 @@ export type StrollHistoryUncheckedUpdateWithoutPicturesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -745,6 +778,7 @@ export type StrollHistoryUncheckedUpdateWithoutPicturesInput = {
 export type StrollHistoryCreateManyUserInput = {
   id?: string
   visitedPlaceId: string
+  placeName?: string | null
   visitedAt: Date | string
   strollTime: number
   meter: number
@@ -755,6 +789,7 @@ export type StrollHistoryCreateManyUserInput = {
 export type StrollHistoryUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -767,6 +802,7 @@ export type StrollHistoryUpdateWithoutUserInput = {
 export type StrollHistoryUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -779,6 +815,7 @@ export type StrollHistoryUncheckedUpdateWithoutUserInput = {
 export type StrollHistoryUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitedPlaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  placeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strollTime?: Prisma.IntFieldUpdateOperationsInput | number
   meter?: Prisma.IntFieldUpdateOperationsInput | number
@@ -830,6 +867,7 @@ export type StrollHistorySelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   userId?: boolean
   visitedPlaceId?: boolean
+  placeName?: boolean
   visitedAt?: boolean
   strollTime?: boolean
   meter?: boolean
@@ -845,6 +883,7 @@ export type StrollHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   userId?: boolean
   visitedPlaceId?: boolean
+  placeName?: boolean
   visitedAt?: boolean
   strollTime?: boolean
   meter?: boolean
@@ -857,6 +896,7 @@ export type StrollHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   userId?: boolean
   visitedPlaceId?: boolean
+  placeName?: boolean
   visitedAt?: boolean
   strollTime?: boolean
   meter?: boolean
@@ -869,6 +909,7 @@ export type StrollHistorySelectScalar = {
   id?: boolean
   userId?: boolean
   visitedPlaceId?: boolean
+  placeName?: boolean
   visitedAt?: boolean
   strollTime?: boolean
   meter?: boolean
@@ -876,7 +917,7 @@ export type StrollHistorySelectScalar = {
   calories?: boolean
 }
 
-export type StrollHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "visitedPlaceId" | "visitedAt" | "strollTime" | "meter" | "steps" | "calories", ExtArgs["result"]["strollHistory"]>
+export type StrollHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "visitedPlaceId" | "placeName" | "visitedAt" | "strollTime" | "meter" | "steps" | "calories", ExtArgs["result"]["strollHistory"]>
 export type StrollHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   pictures?: boolean | Prisma.StrollHistory$picturesArgs<ExtArgs>
@@ -901,6 +942,7 @@ export type $StrollHistoryPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: string
     userId: string
     visitedPlaceId: string
+    placeName: string | null
     visitedAt: Date
     strollTime: number
     meter: number
@@ -1335,6 +1377,7 @@ export interface StrollHistoryFieldRefs {
   readonly id: Prisma.FieldRef<"StrollHistory", 'String'>
   readonly userId: Prisma.FieldRef<"StrollHistory", 'String'>
   readonly visitedPlaceId: Prisma.FieldRef<"StrollHistory", 'String'>
+  readonly placeName: Prisma.FieldRef<"StrollHistory", 'String'>
   readonly visitedAt: Prisma.FieldRef<"StrollHistory", 'DateTime'>
   readonly strollTime: Prisma.FieldRef<"StrollHistory", 'Int'>
   readonly meter: Prisma.FieldRef<"StrollHistory", 'Int'>
