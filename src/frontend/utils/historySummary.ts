@@ -27,6 +27,7 @@ export type MonthlyStats = {
   strollCount: number;
   totalMeter: number;
   totalMinutes: number;
+  totalSteps: number;
 };
 
 const japanDateFormatter = new Intl.DateTimeFormat("en-CA", {
@@ -129,7 +130,7 @@ export function collectCategories(histories: HistoryResponse[]): string[] {
   return [...categories].sort((a, b) => a.localeCompare(b, "ja"));
 }
 
-/** 今月（日本時間）の散歩回数・距離・時間を集計する。 */
+/** 今月（日本時間）の散歩回数・距離・時間・歩数を集計する。 */
 export function summarizeMonthlyStats(
   histories: HistoryResponse[],
   now: Date,
@@ -148,6 +149,7 @@ export function summarizeMonthlyStats(
     strollCount: thisMonth.length,
     totalMeter: Math.round(sum(thisMonth.map((history) => history.meter))),
     totalMinutes: Math.round(sum(thisMonth.map((history) => history.timeTaken))),
+    totalSteps: Math.round(sum(thisMonth.map((history) => history.steps))),
   };
 }
 
