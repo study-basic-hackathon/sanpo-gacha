@@ -8,28 +8,14 @@ import { authenticate } from "@/app/lib/authenticate";
 
 export default function LoginPage() {
   const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target;
-
-    if (name === "email") {
-      setEmail(value);
-    }
-
-    if (name === "password") {
-      setPassword(value);
-    }
-
-    if (loginError) {
-      setLoginError("");
-    }
-  }
-
-  async function handleLogin() {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setLoginError("");
     setIsLoading(true);
 
@@ -46,19 +32,14 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/");
+      router.push("/home");
       router.refresh();
     } catch {
       setLoginError("ログインに失敗しました。");
     } finally {
       setIsLoading(false);
     }
-  }
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    void handleLogin();
-  }
+  };
 
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
@@ -115,12 +96,12 @@ export default function LoginPage() {
                   </span>
 
                   <input
-                    name="email"
                     type="email"
                     value={email}
-                    onChange={handleChange}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="example@sanpo.jp"
                     autoComplete="email"
+                    required
                     className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
                     disabled={isLoading}
                   />
@@ -132,12 +113,12 @@ export default function LoginPage() {
                   </span>
 
                   <input
-                    name="password"
                     type="password"
                     value={password}
-                    onChange={handleChange}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="パスワードを入力"
                     autoComplete="current-password"
+                    required
                     className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
                     disabled={isLoading}
                   />
