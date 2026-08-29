@@ -21,9 +21,7 @@ export default function SearchStrollPage() {
             STROLL CONDITIONS
           </p>
 
-          <h1 className="mt-2 text-2xl font-bold text-[#24483a]">
-            散歩条件
-          </h1>
+          <h1 className="mt-2 text-2xl font-bold text-[#24483a]">散歩条件</h1>
 
           <section className="mt-9">
             <div className="flex items-center gap-3">
@@ -86,9 +84,7 @@ export default function SearchStrollPage() {
 
               <div>
                 <h2 className="font-bold">カテゴリ</h2>
-                <p className="mt-1 text-xs text-[#78847c]">
-                  複数選択できます
-                </p>
+                <p className="mt-1 text-xs text-[#78847c]">複数選択できます</p>
               </div>
             </div>
 
@@ -123,62 +119,6 @@ export default function SearchStrollPage() {
             この条件で検索
           </Link>
         </aside>
-
-        <section className="relative min-h-[650px] overflow-hidden bg-[#e8efe2]">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 opacity-70"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(109,139,116,0.13) 1px, transparent 1px), linear-gradient(90deg, rgba(109,139,116,0.13) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
-
-          <div
-            aria-hidden="true"
-            className="absolute left-[8%] top-[20%] h-8 w-[65%] rotate-12 rounded-full bg-white/60"
-          />
-
-          <div
-            aria-hidden="true"
-            className="absolute right-[4%] top-[48%] h-10 w-[72%] -rotate-12 rounded-full bg-white/60"
-          />
-
-          <div
-            aria-hidden="true"
-            className="absolute bottom-[8%] left-[30%] h-7 w-[60%] rotate-6 rounded-full bg-white/50"
-          />
-
-          <div className="absolute left-8 top-8 rounded-2xl border border-white/80 bg-white/90 px-5 py-4 shadow-sm backdrop-blur">
-            <p className="text-xs font-semibold tracking-[0.18em] text-[#719078]">
-              CURRENT LOCATION
-            </p>
-
-            <p className="mt-1 font-bold text-[#2c4f38]">
-              ● 現在地：門前仲町
-            </p>
-          </div>
-
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-[#3c7d55]/15">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-[#3c7d55] text-2xl text-white shadow-lg">
-                📍
-              </div>
-
-              <span className="absolute -bottom-9 whitespace-nowrap rounded-full bg-white px-4 py-2 text-sm font-bold text-[#31533c] shadow-md">
-                門前仲町
-              </span>
-            </div>
-          </div>
-
-          <div className="absolute bottom-8 right-8 rounded-2xl border border-white/80 bg-white/90 px-5 py-4 text-sm text-[#627268] shadow-sm backdrop-blur">
-            <p className="font-semibold text-[#31533c]">
-              選択した条件から
-            </p>
-            <p className="mt-1">おすすめの散歩先を提案します。</p>
-          </div>
-        </section>
       </div>
     </main>
   );
