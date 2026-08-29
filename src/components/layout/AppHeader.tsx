@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { useState } from "react";
 
 type ActiveNavigation =
   | "home"
@@ -27,9 +31,17 @@ const navigationItems: Array<{
 
 export default function AppHeader({
   active,
-  userName = "王さん",
+  userName,
 }: AppHeaderProps) {
-  const avatarText = userName.trim().charAt(0) || "王";
+  const { data: session } = useSession();
+  const [isSigningOut, setIsSigningOut] = useState(false);
+  const displayedUserName = session?.user?.name?.trim() || userName?.trim() || "ユーザー";
+  const avatarText = displayedUserName.charAt(0) || "ユ";
+
+  async function handleSignOut() {
+    setIsSigningOut(true);
+    await signOut({ callbackUrl: "/login" });
+  }
 
   return (
     <header className="border-b border-[#b7c2b9] bg-white">
@@ -91,7 +103,7 @@ export default function AppHeader({
 
           <div className="absolute right-0 top-14 z-50 w-56 overflow-hidden rounded-2xl border border-[#d2dcd3] bg-white shadow-lg">
             <div className="border-b border-[#e3e9e3] px-5 py-4">
-              <p className="text-sm font-bold text-[#294936]">{userName}</p>
+              <p className="text-sm font-bold text-[#294936]">{displayedUserName}</p>
               <p className="mt-1 text-xs text-[#7a877e]">ログイン中</p>
             </div>
 
@@ -104,13 +116,15 @@ export default function AppHeader({
                 <span>アカウント設定</span>
               </Link>
 
-              <Link
-                href="/login"
+              <button
+                type="button"
+                onClick={handleSignOut}
+                disabled={isSigningOut}
                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-[#a65353] transition hover:bg-[#fff2f2]"
               >
                 <span aria-hidden="true">↪</span>
-                <span>ログアウト</span>
-              </Link>
+                <span>{isSigningOut ? "ログアウト中..." : "ログアウト"}</span>
+              </button>
             </div>
           </div>
         </details>
