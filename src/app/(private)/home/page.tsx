@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import AppHeader from "@/components/layout/AppHeader";
+import HomeGreeting from "@/components/home/HomeGreeting";
 import RecentStrolls from "@/components/home/RecentStrolls";
 
 export default function HomePage() {
@@ -10,7 +12,9 @@ export default function HomePage() {
       <section className="bg-[#eaf4e9] px-6 py-16">
         <div className="mx-auto max-w-[1200px] text-center">
           <p className="text-sm font-semibold tracking-[0.18em] text-[#4f765d]">
-            GOOD AFTERNOON, 王さん
+            <Suspense fallback="GOOD AFTERNOON">
+              <HomeGreeting />
+            </Suspense>
           </p>
 
           <h1 className="mt-4 text-3xl font-bold leading-tight text-[#254d35] sm:text-4xl lg:text-5xl">
