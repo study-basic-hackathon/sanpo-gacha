@@ -1,56 +1,69 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { registerUser } from "@/frontend/api/auth";
+import { authenticate } from "../lib/authenticate";
 
 export default function RegisterPage() {
   const router = useRouter();
 
-  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] =
-    useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [registerError, setRegisterError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setErrorMessage("");
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setRegisterError("");
+    setIsLoading(true);
 
-    if (
-      !displayName.trim() ||
-      !email.trim() ||
-      !password ||
-      !passwordConfirmation
-    ) {
-      setErrorMessage("すべての項目を入力してください。");
-      return;
-    }
-
-    if (password.length < 8) {
-      setErrorMessage(
-        "パスワードは8文字以上で入力してください。",
-      );
+    if (!email.trim() || !password.trim() || !passwordConfirmation.trim()) {
+      setRegisterError("すべての項目を入力してください。");
+      setIsLoading(false);
       return;
     }
 
     if (password !== passwordConfirmation) {
-      setErrorMessage("確認用パスワードが一致しません。");
+      setRegisterError("確認用パスワードが一致しません。");
+      setIsLoading(false);
       return;
     }
 
-    // 現在はモックのため、実際の登録処理は行いません。
-    router.push("/onboarding");
-  }
+    try {
+      const result = await registerUser(email, password);
+
+      if (!result.success) {
+        setRegisterError("新規登録に失敗しました。");
+        return;
+      }
+
+      const authenticateResult = await authenticate({
+        email,
+        password,
+      });
+
+      if (!authenticateResult.success) {
+        setRegisterError("登録後のログインに失敗しました。");
+        return;
+      }
+
+      router.push("/onboarding");
+      router.refresh();
+    } catch {
+      setRegisterError("新規登録に失敗しました。");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <main className="min-h-screen bg-[#f7f9f6] text-[#24352b]">
       <header className="flex h-20 items-center border-b border-[#b7c2b9] bg-white px-8 lg:px-16">
-        <Link
-          href="/"
-          className="flex items-center gap-2.5"
-        >
+        <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/sanpo-gacha-logo.png"
             alt=""
@@ -96,25 +109,8 @@ export default function RegisterPage() {
               さんぽガチャを始めるための情報を入力してください。
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-8">
+            <form onSubmit={handleRegister} className="mt-8">
               <div className="space-y-5">
-                <label className="block">
-                  <span className="mb-2 block text-sm font-semibold">
-                    表示名
-                  </span>
-
-                  <input
-                    type="text"
-                    value={displayName}
-                    onChange={(event) =>
-                      setDisplayName(event.target.value)
-                    }
-                    placeholder="王さん"
-                    autoComplete="nickname"
-                    className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
-                  />
-                </label>
-
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold">
                     メールアドレス
@@ -123,12 +119,12 @@ export default function RegisterPage() {
                   <input
                     type="email"
                     value={email}
-                    onChange={(event) =>
-                      setEmail(event.target.value)
-                    }
+                    onChange={(event) => setEmail(event.target.value)}
                     placeholder="example@sanpo.jp"
                     autoComplete="email"
+                    required
                     className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
+                    disabled={isLoading}
                   />
                 </label>
 
@@ -140,12 +136,12 @@ export default function RegisterPage() {
                   <input
                     type="password"
                     value={password}
-                    onChange={(event) =>
-                      setPassword(event.target.value)
-                    }
+                    onChange={(event) => setPassword(event.target.value)}
                     placeholder="8文字以上で入力"
                     autoComplete="new-password"
+                    required
                     className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
+                    disabled={isLoading}
                   />
                 </label>
 
@@ -162,25 +158,28 @@ export default function RegisterPage() {
                     }
                     placeholder="もう一度入力"
                     autoComplete="new-password"
+                    required
                     className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
+                    disabled={isLoading}
                   />
                 </label>
               </div>
 
-              {errorMessage && (
+              {registerError && (
                 <div
                   role="alert"
                   className="mt-5 rounded-xl border border-[#e5bcbc] bg-[#fff4f4] px-4 py-3 text-sm text-[#a34e4e]"
                 >
-                  {errorMessage}
+                  {registerError}
                 </div>
               )}
 
               <button
                 type="submit"
-                className="mt-7 flex h-12 w-full items-center justify-center rounded-xl bg-[#3c7d55] font-semibold text-white transition hover:bg-[#2f6544]"
+                disabled={isLoading}
+                className="mt-7 flex h-12 w-full items-center justify-center rounded-xl bg-[#3c7d55] font-semibold text-white transition hover:bg-[#2f6544] disabled:cursor-not-allowed disabled:opacity-50"
               >
-                アカウントを作成
+                {isLoading ? "アカウントを作成中..." : "アカウントを作成"}
               </button>
             </form>
 
@@ -194,12 +193,6 @@ export default function RegisterPage() {
                 ログイン
               </Link>
             </div>
-
-            <p className="mt-7 text-center text-xs leading-5 text-[#879188]">
-              ※ 現在はモック画面のため、
-              <br />
-              実際のアカウント登録は行いません。
-            </p>
           </div>
         </section>
       </div>
