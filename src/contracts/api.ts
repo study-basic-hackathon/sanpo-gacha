@@ -202,8 +202,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** 画像を個別取得 */
-        get: operations["getImage"];
+        get?: never;
         put?: never;
         post?: never;
         /** 画像を削除 */
@@ -437,25 +436,29 @@ export interface components {
              */
             createdAt: string;
             /**
-             * @description 散歩履歴に紐づく画像パスの一覧
+             * @description 散歩履歴に紐づく画像の参照パス一覧。画像の取得はこのフィールドで行い、
+             *     画像取得用の個別APIは設けない。
+             *     画像ファイルを直接指すため、そのまま img の src に指定できる。
+             *     開発環境では /images 配下の静的パス、本番環境ではオブジェクトストレージのURL。
              * @example [
-             *       "/images/history-001/image-001.jpg",
-             *       "/images/history-001/image-002.jpg"
+             *       "/images/history-001/9f2c1a4e-6b3d-4c8a-91f2-0a7e5d3b1c4f.jpg",
+             *       "/images/history-001/3d81b7c0-52ea-4f19-8b6d-7c2a9e4f0d15.jpg"
              *     ]
              */
             imagePaths: string[];
         };
         CreateImagePayload: {
             /**
-             * @description 画像のID
-             * @example image-001
-             */
-            imageId: string;
-            /**
              * @description 画像が紐づく散歩履歴のID
              * @example history-001
              */
             historyId: string;
+            /**
+             * Format: binary
+             * @description 画像ファイル本体。対応形式は image/jpeg・image/png・image/webp、
+             *     最大5MB。画像のIDはサーバー側で採番する。
+             */
+            file: string;
         };
         ImageResponse: {
             /**
@@ -468,6 +471,12 @@ export interface components {
              * @example history-001
              */
             historyId: string;
+            /**
+             * @description 画像ファイルの参照パス。HistoryResponse.imagePaths と同じ形式。
+             *     開発環境では /images 配下の静的パス、本番環境ではオブジェクトストレージのURL。
+             * @example /images/history-001/9f2c1a4e-6b3d-4c8a-91f2-0a7e5d3b1c4f.jpg
+             */
+            imagePath: string;
         };
     };
     responses: {
@@ -915,7 +924,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["CreateImagePayload"];
+                "multipart/form-data": components["schemas"]["CreateImagePayload"];
             };
         };
         responses: {
@@ -929,32 +938,6 @@ export interface operations {
                 };
             };
             400: components["responses"]["InvalidError"];
-            401: components["responses"]["UnauthorizedError"];
-            404: components["responses"]["NotFoundError"];
-            500: components["responses"]["UnexpectedError"];
-        };
-    };
-    getImage: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description 画像のID */
-                imageId: components["parameters"]["ImageIdParam"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description 画像情報の取得成功 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ImageResponse"];
-                };
-            };
             401: components["responses"]["UnauthorizedError"];
             404: components["responses"]["NotFoundError"];
             500: components["responses"]["UnexpectedError"];

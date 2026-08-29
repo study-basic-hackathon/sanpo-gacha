@@ -363,7 +363,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/CreateImagePayload"
       responses:
@@ -383,28 +383,6 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
 
   /api/image/{imageId}:
-    get:
-      tags: [image]
-      security:
-        - jwtAuth: []
-      summary: 画像を個別取得
-      operationId: getImage
-      parameters:
-        - $ref: "#/components/parameters/ImageIdParam"
-      responses:
-        "200":
-          description: 画像情報の取得成功
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ImageResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedError"
-        "404":
-          $ref: "#/components/responses/NotFoundError"
-        "500":
-          $ref: "#/components/responses/UnexpectedError"
-
     delete:
       tags: [image]
       security:
@@ -693,34 +671,41 @@ components:
 
         imagePaths:
           type: array
-          description: 散歩履歴に紐づく画像パスの一覧
+          description: |
+            散歩履歴に紐づく画像の参照パス一覧。画像の取得はこのフィールドで行い、
+            画像取得用の個別APIは設けない。
+            画像ファイルを直接指すため、そのまま img の src に指定できる。
+            開発環境では /images 配下の静的パス、本番環境ではオブジェクトストレージのURL。
           items:
             type: string
           example:
-            - "/images/history-001/image-001.jpg"
-            - "/images/history-001/image-002.jpg"
+            - "/images/history-001/9f2c1a4e-6b3d-4c8a-91f2-0a7e5d3b1c4f.jpg"
+            - "/images/history-001/3d81b7c0-52ea-4f19-8b6d-7c2a9e4f0d15.jpg"
 
     CreateImagePayload:
       type: object
       required:
-        - imageId
         - historyId
+        - file
       properties:
-        imageId:
-          type: string
-          description: 画像のID
-          example: "image-001"
-
         historyId:
           type: string
           description: 画像が紐づく散歩履歴のID
           example: "history-001"
+
+        file:
+          type: string
+          format: binary
+          description: |
+            画像ファイル本体。対応形式は image/jpeg・image/png・image/webp、
+            最大5MB。画像のIDはサーバー側で採番する。
 
     ImageResponse:
       type: object
       required:
         - imageId
         - historyId
+        - imagePath
       properties:
         imageId:
           type: string
@@ -731,6 +716,13 @@ components:
           type: string
           description: 画像が紐づく散歩履歴のID
           example: "history-001"
+
+        imagePath:
+          type: string
+          description: |
+            画像ファイルの参照パス。HistoryResponse.imagePaths と同じ形式。
+            開発環境では /images 配下の静的パス、本番環境ではオブジェクトストレージのURL。
+          example: "/images/history-001/9f2c1a4e-6b3d-4c8a-91f2-0a7e5d3b1c4f.jpg"
 
   parameters:
     HistoryIdParam:
