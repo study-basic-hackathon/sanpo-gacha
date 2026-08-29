@@ -11,6 +11,7 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [registerError, setRegisterError] = useState("");
@@ -21,7 +22,7 @@ export default function RegisterPage() {
     setRegisterError("");
     setIsLoading(true);
 
-    if (!email.trim() || !password.trim() || !passwordConfirmation.trim()) {
+    if (!email.trim() || !username.trim() || !password.trim() || !passwordConfirmation.trim()) {
       setRegisterError("すべての項目を入力してください。");
       setIsLoading(false);
       return;
@@ -40,7 +41,7 @@ export default function RegisterPage() {
     }
 
     try {
-      const result = await registerUser(email, password);
+      const result = await registerUser(email, username, password);
 
       if (!result.success) {
         setRegisterError("新規登録に失敗しました。");
@@ -117,6 +118,23 @@ export default function RegisterPage() {
 
             <form onSubmit={handleRegister} className="mt-8">
               <div className="space-y-5">
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold">
+                    ユーザー名
+                  </span>
+
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
+                    placeholder="さんぽ太郎"
+                    autoComplete="username"
+                    required
+                    className="h-12 w-full rounded-xl border border-[#bcc8bf] px-4 outline-none transition focus:border-[#3c7d55] focus:ring-4 focus:ring-[#3c7d55]/10"
+                    disabled={isLoading}
+                  />
+                </label>
+
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold">
                     メールアドレス

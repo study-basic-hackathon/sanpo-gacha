@@ -239,6 +239,11 @@ export interface components {
              */
             email: string;
             /**
+             * @description ユーザー名
+             * @example さんぽ太郎
+             */
+            username: string;
+            /**
              * Format: password
              * @description パスワード（8文字以上）
              * @example plain-text-password
