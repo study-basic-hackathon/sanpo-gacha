@@ -1,7 +1,34 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useLocation } from "@/frontend/contexts/LocationContext";
 
 export default function LocationPermissionPage() {
+  const router = useRouter();
+  const { requestCurrentLocation } = useLocation();
+  const [error, setError] = useState<string | null>(null);
+  const [isRequesting, setIsRequesting] = useState(false);
+
+  async function handlePermission() {
+    setIsRequesting(true);
+    setError(null);
+
+    try {
+      await requestCurrentLocation();
+      router.push("/home");
+    } catch (reason) {
+      setError(
+        reason instanceof Error
+          ? reason.message
+          : "現在地を取得できませんでした。",
+      );
+      setIsRequesting(false);
+    }
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#f7f9f6] text-[#24352b]">
       <div
@@ -70,15 +97,19 @@ export default function LocationPermissionPage() {
           <span>位置情報は安全に取り扱い、許可なく保存しません。</span>
         </div>
 
-        <Link
-          href="/home"
+        <button
+          type="button"
+          onClick={handlePermission}
+          disabled={isRequesting}
           className="mt-10 flex h-14 min-w-[280px] items-center justify-center rounded-full bg-[#24483a] px-10 font-semibold text-white shadow-[0_10px_30px_rgba(36,72,58,0.2)] transition hover:-translate-y-0.5 hover:bg-[#19382c] hover:shadow-[0_14px_35px_rgba(36,72,58,0.25)] focus:outline-none focus:ring-4 focus:ring-[#24483a]/20"
         >
-          位置情報を許可する
-        </Link>
+          {isRequesting ? "現在地を取得中…" : "位置情報を許可する"}
+        </button>
+
+        {error && <p role="alert" className="mt-4 text-sm text-[#b45f52]">{error}</p>}
 
         <p className="mt-5 text-xs leading-5 text-[#8a958e]">
-          ※ 現在はモック画面のため、位置情報の取得は行いません。
+          ※ 位置情報はこのアプリの利用中のみ保持します。
         </p>
       </section>
     </main>

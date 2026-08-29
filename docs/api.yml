@@ -15,6 +15,9 @@ tags:
   - name: search-stroll
     description: 散歩条件から目的地候補を検索するAPI
 
+  - name: map
+    description: 現在地から目的地までの地図を埋め込むAPI
+
   - name: history
     description: 散歩履歴を管理するAPI
 
@@ -196,15 +199,71 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/SearchStrollResponse"
+                $ref: "#/components/schemas/SearchStrollResponse"
         "400":
           $ref: "#/components/responses/InvalidError"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
         "500":
           $ref: "#/components/responses/UnexpectedError"
+
+  /api/map:
+    get:
+      tags: [map]
+      summary: 徒歩ルート地図を表示
+      operationId: getWalkingMap
+      parameters:
+        - name: originLat
+          in: query
+          required: true
+          description: 現在地の緯度
+          schema:
+            type: number
+            minimum: -90
+            maximum: 90
+          example: 35.681236
+        - name: originLng
+          in: query
+          required: true
+          description: 現在地の経度
+          schema:
+            type: number
+            minimum: -180
+            maximum: 180
+          example: 139.767125
+        - name: destinationLat
+          in: query
+          required: true
+          description: 目的地の緯度
+          schema:
+            type: number
+            minimum: -90
+            maximum: 90
+          example: 35.689634
+        - name: destinationLng
+          in: query
+          required: true
+          description: 目的地の経度
+          schema:
+            type: number
+            minimum: -180
+            maximum: 180
+          example: 139.692101
+      responses:
+        "307":
+          description: Google Maps Embed API の徒歩ルート地図へリダイレクト
+        "400":
+          description: 座標または地図用 API キーが不正・未設定
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: map_unavailable
 
   /api/history:
     get:
@@ -467,7 +526,7 @@ components:
 
         categories:
           type: string
-          description: 目的地のカテゴリ
+          description: 目的地のカテゴリ（複数指定する場合はカンマ区切り）
           example: "公園"
 
         duration:
@@ -482,6 +541,8 @@ components:
         - name
         - meter
         - scheduledTime
+        - latitude
+        - longitude
       properties:
         placeId:
           type: string
@@ -503,10 +564,21 @@ components:
           description: 現在地から目的地までの予定所要時間
           example: 35
 
+        latitude:
+          type: number
+          description: 目的地の緯度
+          example: 35.689634
+
+        longitude:
+          type: number
+          description: 目的地の経度
+          example: 139.692101
+
     CreateHistoryPayload:
       type: object
       required:
         - placeId
+        - placeName
         - categories
         - timeTaken
         - meter
@@ -517,6 +589,11 @@ components:
           type: string
           description: Google Places APIの目的地ID
           example: "ChIJ123456789"
+
+        placeName:
+          type: string
+          description: 検索結果で取得した目的地名
+          example: "木場公園"
 
         categories:
           type: string
@@ -575,7 +652,7 @@ components:
 
         placeName:
           type: string
-          description: placeIdから解決した目的地の名称。解決できなかった場合は空文字
+          description: 保存済みの目的地名。旧データなど未保存の場合は空文字
           example: "木場公園"
 
         categories:

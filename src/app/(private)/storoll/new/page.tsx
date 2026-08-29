@@ -2,18 +2,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+import {
+  loadSearchStrollResults,
+  type SearchStrollCandidate,
+} from "@/frontend/utils/searchStrollResults";
+import { startNewStroll } from "@/frontend/utils/strollProgress";
 
 export default function NewStrollPage() {
   const router = useRouter();
+  const destination = useSyncExternalStore<SearchStrollCandidate | null>(
+    () => () => {},
+    () => loadSearchStrollResults()[0] ?? null,
+    () => null,
+  );
 
   const [checkedSafety, setCheckedSafety] = useState(true);
   const [checkedScreen, setCheckedScreen] = useState(true);
 
-  const canStart = checkedSafety && checkedScreen;
+  const canStart = !!destination && checkedSafety && checkedScreen;
 
   function handleStart() {
     if (canStart) {
+      startNewStroll();
       router.push("/stroll");
     }
   }
@@ -63,11 +74,11 @@ export default function NewStrollPage() {
 
             <div>
               <h2 className="text-2xl font-bold text-[#24483a]">
-                富岡八幡宮
+                {destination?.name ?? "目的地が選択されていません"}
               </h2>
 
               <p className="mt-1 text-sm text-[#718078]">
-                神社・寺
+                {destination?.category ?? "検索画面から候補を選択してください"}
               </p>
             </div>
           </div>
@@ -76,14 +87,14 @@ export default function NewStrollPage() {
             <div className="text-center">
               <p className="text-xs text-[#78847c]">予定時間</p>
               <p className="mt-2 text-lg font-bold text-[#2f6544]">
-                約20分
+                {destination ? `約${destination.scheduledTime}分` : "-"}
               </p>
             </div>
 
             <div className="text-center">
               <p className="text-xs text-[#78847c]">距離</p>
               <p className="mt-2 text-lg font-bold text-[#2f6544]">
-                1.4 km
+                {destination ? `${(destination.meter / 1000).toFixed(1)} km` : "-"}
               </p>
             </div>
           </div>
@@ -160,7 +171,9 @@ export default function NewStrollPage() {
 
           {!canStart && (
             <p className="mt-3 text-center text-xs text-[#b45f52]">
-              安全確認の2項目にチェックしてください。
+              {destination
+                ? "安全確認の2項目にチェックしてください。"
+                : "検索画面から目的地を選択してください。"}
             </p>
           )}
         </div>

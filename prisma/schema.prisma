@@ -71,6 +71,7 @@ model StrollHistory {
   id             String                  @id @default(cuid())
   userId         String
   visitedPlaceId String
+  placeName      String?
   visitedAt      DateTime
   strollTime     Int
   meter          Int

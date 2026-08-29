@@ -136,6 +136,7 @@ export const StrollHistoryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   visitedPlaceId: 'visitedPlaceId',
+  placeName: 'placeName',
   visitedAt: 'visitedAt',
   strollTime: 'strollTime',
   meter: 'meter',
