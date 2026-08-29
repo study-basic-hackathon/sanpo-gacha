@@ -173,12 +173,27 @@ describe("collectCategories", () => {
 });
 
 describe("summarizeMonthlyStats", () => {
-  it("今月の回数・距離・時間を集計する", () => {
+  it("今月の回数・距離・時間・歩数を集計する", () => {
     const stats = summarizeMonthlyStats(
       [
-        history({ createdAt: "2026-08-02T01:00:00.000Z", meter: 3200, timeTaken: 45 }),
-        history({ createdAt: "2026-08-18T01:00:00.000Z", meter: 1800, timeTaken: 24 }),
-        history({ createdAt: "2026-07-18T01:00:00.000Z", meter: 9999, timeTaken: 99 }),
+        history({
+          createdAt: "2026-08-02T01:00:00.000Z",
+          meter: 3200,
+          timeTaken: 45,
+          steps: 4200,
+        }),
+        history({
+          createdAt: "2026-08-18T01:00:00.000Z",
+          meter: 1800,
+          timeTaken: 24,
+          steps: 2400,
+        }),
+        history({
+          createdAt: "2026-07-18T01:00:00.000Z",
+          meter: 9999,
+          timeTaken: 99,
+          steps: 9999,
+        }),
       ],
       NOW,
     );
@@ -187,6 +202,7 @@ describe("summarizeMonthlyStats", () => {
       strollCount: 2,
       totalMeter: 5000,
       totalMinutes: 69,
+      totalSteps: 6600,
     });
   });
 
@@ -195,6 +211,7 @@ describe("summarizeMonthlyStats", () => {
       strollCount: 0,
       totalMeter: 0,
       totalMinutes: 0,
+      totalSteps: 0,
     });
   });
 });
