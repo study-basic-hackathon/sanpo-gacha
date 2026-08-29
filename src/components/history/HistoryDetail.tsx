@@ -70,6 +70,10 @@ export default function HistoryDetail({ historyId }: HistoryDetailProps) {
   return <DetailContent history={state.history} />;
 }
 
+// 写真機能はAPIが未対応のため、準備中として無効にしている。
+// 対応後はtrueに戻すと、保存済みの写真表示がそのまま使える。
+const IS_PHOTO_FEATURE_ENABLED: boolean = false;
+
 function DetailContent({ history }: { history: HistoryResponse }) {
   const categories = splitCategories(history.categories);
 
@@ -90,7 +94,11 @@ function DetailContent({ history }: { history: HistoryResponse }) {
       </div>
 
       <section className="mt-8 overflow-hidden rounded-2xl border border-[#d7e1d8] bg-white shadow-sm">
-        <PhotoViewer imagePaths={history.imagePaths} />
+        {IS_PHOTO_FEATURE_ENABLED ? (
+          <PhotoViewer imagePaths={history.imagePaths} />
+        ) : (
+          <PhotoComingSoon />
+        )}
 
         <div className="grid grid-cols-2 divide-[#e2e8e2] border-t border-[#e2e8e2] sm:grid-cols-4 sm:divide-x">
           <ResultItem
@@ -149,7 +157,16 @@ function DetailContent({ history }: { history: HistoryResponse }) {
             <dt className="text-xs text-[#738078]">写真</dt>
 
             <dd className="mt-2 text-sm text-[#526258]">
-              {history.imagePaths.length}枚
+              {IS_PHOTO_FEATURE_ENABLED ? (
+                `${history.imagePaths.length}枚`
+              ) : (
+                <span
+                  title="準備中の機能です"
+                  className="rounded-full bg-[#f1f4f1] px-2 py-0.5 text-[10px] font-semibold text-[#9aa79d]"
+                >
+                  準備中
+                </span>
+              )}
             </dd>
           </div>
         </dl>
@@ -217,6 +234,29 @@ function PhotoViewer({ imagePaths }: { imagePaths: string[] }) {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function PhotoComingSoon() {
+  return (
+    <div
+      title="準備中の機能です"
+      className="flex h-[360px] flex-col items-center justify-center bg-[#edf3ec] text-[#708076]"
+    >
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl shadow-sm">
+        📷
+      </div>
+
+      <p className="mt-5 flex items-center gap-2 font-semibold">
+        写真
+
+        <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-[#9aa79d]">
+          準備中
+        </span>
+      </p>
+
+      <p className="mt-2 text-sm">写真の登録・表示は今後対応予定です。</p>
     </div>
   );
 }

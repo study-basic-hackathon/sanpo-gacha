@@ -114,12 +114,14 @@ export default function SettingsPage() {
                 isLoading={isRequestingLocation}
               />
 
+              {/* 写真機能はAPIが未対応のため、準備中として無効にしている。 */}
               <SettingRow
-                  icon="📷"
-                  title="カメラ"
-                  description="散歩中の写真撮影に使用します。"
-                  onClick={() => {}}
-                  disabled
+                icon="📷"
+                title="カメラ"
+                description="散歩中の写真撮影に使用します。"
+                onClick={() => {}}
+                disabled
+                comingSoon
               />
             </div>
           </section>
@@ -242,6 +244,7 @@ function SettingRow({
   onClick,
   disabled = false,
   isLoading = false,
+  comingSoon = false,
 }: {
   icon: string;
   title: string;
@@ -250,6 +253,7 @@ function SettingRow({
   onClick: () => void;
   disabled?: boolean;
   isLoading?: boolean;
+  comingSoon?: boolean;
 }) {
   return (
     <div className="flex items-center justify-between gap-5 py-5 first:pt-0 last:pb-0">
@@ -264,7 +268,16 @@ function SettingRow({
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center gap-4">
+      <div
+        className="flex shrink-0 items-center gap-4"
+        title={comingSoon ? "準備中の機能です" : undefined}
+      >
+        {comingSoon && (
+          <span className="rounded-full bg-[#f1f4f1] px-2 py-0.5 text-[10px] font-semibold text-[#9aa79d]">
+            準備中
+          </span>
+        )}
+
         {status && (
           <span className="rounded-full bg-[#e7f3e9] px-3 py-1 text-xs font-bold text-[#34714c]">
             {status}
