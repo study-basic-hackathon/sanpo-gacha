@@ -13,6 +13,7 @@ import {
   formatCalories,
   formatDistance,
   formatDuration,
+  formatPlaceName,
   formatSteps,
   formatVisitedAt,
   splitCategories,
@@ -80,9 +81,7 @@ function DetailContent({ history }: { history: HistoryResponse }) {
         </p>
 
         <h1 className="mt-2 text-3xl font-bold text-[#173f2d]">
-          {categories.length > 0
-            ? `「${categories.join("・")}」への散歩`
-            : "散歩の記録"}
+          {`「${formatPlaceName(history.placeName)}」への散歩`}
         </h1>
 
         <p className="mt-2 text-sm text-[#647469]">
@@ -131,10 +130,10 @@ function DetailContent({ history }: { history: HistoryResponse }) {
           </div>
 
           <div>
-            <dt className="text-xs text-[#738078]">目的地ID</dt>
+            <dt className="text-xs text-[#738078]">訪れた場所</dt>
 
             <dd className="mt-2 break-all text-sm text-[#526258]">
-              {history.placeId}
+              {formatPlaceName(history.placeName)}
             </dd>
           </div>
 
