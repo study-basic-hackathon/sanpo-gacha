@@ -79,7 +79,7 @@ export default function SearchStrollPage() {
           category: selectedCategories.join("・"),
         };
         saveSearchStrollResults([candidate]);
-        router.push("/storoll/new");
+        router.push("/stroll/new");
       } catch (reason) {
         setError(
           reason instanceof Error
