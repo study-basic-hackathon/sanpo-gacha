@@ -1,13 +1,18 @@
 "use client";
 
 import AppHeader from "@/components/layout/AppHeader";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { deleteUser } from "@/frontend/api/auth";
 import { useLocation } from "@/frontend/contexts/LocationContext";
 
 export default function SettingsPage() {
+  const router = useRouter();
   const notificationEnabled = false;
   const [message, setMessage] = useState("");
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
   const [isRequestingLocation, setIsRequestingLocation] = useState(false);
   const { location, requestCurrentLocation } = useLocation();
 
@@ -26,6 +31,29 @@ export default function SettingsPage() {
       );
     } finally {
       setIsRequestingLocation(false);
+    }
+  }
+
+  async function handleDeleteAccount() {
+    setIsDeleting(true);
+    setDeleteError("");
+
+    try {
+      const result = await deleteUser();
+
+      if (!result.success) {
+        throw new Error("アカウントの削除に失敗しました。もう一度お試しください。");
+      }
+
+      router.replace("/login");
+      router.refresh();
+    } catch (reason) {
+      setDeleteError(
+        reason instanceof Error
+          ? reason.message
+          : "アカウントの削除に失敗しました。",
+      );
+      setIsDeleting(false);
     }
   }
 
@@ -145,9 +173,12 @@ export default function SettingsPage() {
           </section>
 
           <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={() => setIsDeleteDialogOpen(true)}
+              <button
+                type="button"
+                onClick={() => {
+                  setDeleteError("");
+                  setIsDeleteDialogOpen(true);
+                }}
               className="rounded-xl bg-[#b34f4f] px-8 py-3 text-sm font-bold text-white transition hover:bg-[#32744c]"
             >
               アカウントを削除
@@ -173,20 +204,27 @@ export default function SettingsPage() {
             <p className="mt-3 text-sm leading-6 text-[#718078]">
               アカウントを削除すると、元に戻すことはできません。
             </p>
+            {deleteError && (
+              <p className="mt-3 text-sm text-[#b34f4f]" role="alert">
+                {deleteError}
+              </p>
+            )}
             <div className="mt-7 flex justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setIsDeleteDialogOpen(false)}
+                disabled={isDeleting}
                 className="rounded-xl border border-[#7b9683] px-5 py-3 text-sm font-bold text-[#315f42] transition hover:bg-[#f0f5f0]"
               >
                 やめる
               </button>
               <button
                 type="button"
-                onClick={() => setIsDeleteDialogOpen(false)}
-                className="rounded-xl bg-[#b34f4f] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#983f3f]"
+                onClick={handleDeleteAccount}
+                disabled={isDeleting}
+                className="rounded-xl bg-[#b34f4f] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#983f3f] disabled:cursor-not-allowed disabled:opacity-50"
               >
-                削除する
+                {isDeleting ? "削除中…" : "削除する"}
               </button>
             </div>
           </div>
