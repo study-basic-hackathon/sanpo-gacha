@@ -446,6 +446,7 @@ components:
       type: object
       required:
         - email
+        - username
         - password
       properties:
         email:
@@ -453,6 +454,10 @@ components:
           format: email
           description: メールアドレス
           example: user@example.com
+        username:
+          type: string
+          description: ユーザー名
+          example: さんぽ太郎
         password:
           type: string
           format: password

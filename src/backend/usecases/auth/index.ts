@@ -5,19 +5,26 @@ import { success, fail } from "@/backend/utils/Result";
 
 interface RegisterInput {
   email: string;
+  username: string;
   password: string;
 }
 
 export async function register({
   email,
+  username,
   password,
 }: RegisterInput): Promise<Result<string, string>> {
   try {
     const normalizedEmail = email.trim().toLowerCase();
+    const normalizedUsername = username.trim();
     const rawPassword = password.trim();
 
     if (!normalizedEmail) {
       return fail("メールアドレスは必須です。");
+    }
+
+    if (!normalizedUsername) {
+      return fail("ユーザー名は必須です。");
     }
 
     if (!rawPassword) {
@@ -37,6 +44,7 @@ export async function register({
     const result = await prisma.user.create({
       data: {
         email: normalizedEmail,
+        name: normalizedUsername,
         passwordHash,
       },
     });

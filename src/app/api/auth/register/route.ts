@@ -6,6 +6,7 @@ export async function POST(req: Request) {
 
   const result = await register({
     email: body.email ?? "",
+    username: body.username ?? "",
     password: body.password ?? "",
   });
 
