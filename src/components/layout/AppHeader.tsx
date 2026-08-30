@@ -29,13 +29,11 @@ const navigationItems: Array<{
   { key: "settings", href: "/settings", label: "アカウント設定" },
 ];
 
-export default function AppHeader({
-  active,
-  userName,
-}: AppHeaderProps) {
+export default function AppHeader({ active, userName }: AppHeaderProps) {
   const { data: session } = useSession();
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const displayedUserName = session?.user?.name?.trim() || userName?.trim() || "ユーザー";
+  const displayedUserName =
+    session?.user?.name?.trim() || userName?.trim() || "ユーザー";
   const avatarText = displayedUserName.charAt(0) || "ユ";
 
   async function handleSignOut() {
@@ -103,7 +101,9 @@ export default function AppHeader({
 
           <div className="absolute right-0 top-14 z-50 w-56 overflow-hidden rounded-2xl border border-[#d2dcd3] bg-white shadow-lg">
             <div className="border-b border-[#e3e9e3] px-5 py-4">
-              <p className="text-sm font-bold text-[#294936]">{displayedUserName}</p>
+              <p className="text-sm font-bold text-[#294936]">
+                {displayedUserName}
+              </p>
               <p className="mt-1 text-xs text-[#7a877e]">ログイン中</p>
             </div>
 

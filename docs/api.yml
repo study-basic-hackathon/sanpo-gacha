@@ -210,52 +210,35 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
 
   /api/map:
-    get:
+    post:
       tags: [map]
-      summary: 徒歩ルート地図を表示
+      summary: 現在地から目的地までの徒歩経路を取得
       operationId: getWalkingMap
-      parameters:
-        - name: originLat
-          in: query
-          required: true
-          description: 現在地の緯度
-          schema:
-            type: number
-            minimum: -90
-            maximum: 90
-          example: 35.681236
-        - name: originLng
-          in: query
-          required: true
-          description: 現在地の経度
-          schema:
-            type: number
-            minimum: -180
-            maximum: 180
-          example: 139.767125
-        - name: destinationLat
-          in: query
-          required: true
-          description: 目的地の緯度
-          schema:
-            type: number
-            minimum: -90
-            maximum: 90
-          example: 35.689634
-        - name: destinationLng
-          in: query
-          required: true
-          description: 目的地の経度
-          schema:
-            type: number
-            minimum: -180
-            maximum: 180
-          example: 139.692101
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [origin, destination]
+              properties:
+                origin:
+                  $ref: "#/components/schemas/Location"
+                destination:
+                  $ref: "#/components/schemas/Location"
       responses:
-        "307":
-          description: Google Maps Embed API の徒歩ルート地図へリダイレクト
+        "200":
+          description: Routes API が返す徒歩経路
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [encodedPolyline]
+                properties:
+                  encodedPolyline:
+                    type: string
         "400":
-          description: 座標または地図用 API キーが不正・未設定
+          description: 座標または Routes API キーが不正・未設定
           content:
             application/json:
               schema:
@@ -264,6 +247,8 @@ paths:
                   message:
                     type: string
                     example: map_unavailable
+        "502":
+          description: Routes API が経路を返せなかった
 
   /api/history:
     get:
@@ -425,6 +410,23 @@ paths:
 
 components:
   schemas:
+    Location:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+          example: 35.681236
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+          example: 139.767125
+
     SignInPayload:
       type: object
       required:
