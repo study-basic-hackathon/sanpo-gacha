@@ -132,10 +132,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** 徒歩ルート地図を表示 */
-        get: operations["getWalkingMap"];
+        get?: never;
         put?: never;
-        post?: never;
+        /** 現在地から目的地までの徒歩経路を取得 */
+        post: operations["getWalkingMap"];
         delete?: never;
         options?: never;
         head?: never;
@@ -217,6 +217,12 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        Location: {
+            /** @example 35.681236 */
+            latitude: number;
+            /** @example 139.767125 */
+            longitude: number;
+        };
         SignInPayload: {
             /**
              * Format: email
@@ -758,42 +764,32 @@ export interface operations {
     };
     getWalkingMap: {
         parameters: {
-            query: {
-                /**
-                 * @description 現在地の緯度
-                 * @example 35.681236
-                 */
-                originLat: number;
-                /**
-                 * @description 現在地の経度
-                 * @example 139.767125
-                 */
-                originLng: number;
-                /**
-                 * @description 目的地の緯度
-                 * @example 35.689634
-                 */
-                destinationLat: number;
-                /**
-                 * @description 目的地の経度
-                 * @example 139.692101
-                 */
-                destinationLng: number;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
+        requestBody: {
+            content: {
+                "application/json": {
+                    origin: components["schemas"]["Location"];
+                    destination: components["schemas"]["Location"];
+                };
+            };
+        };
         responses: {
-            /** @description Google Maps Embed API の徒歩ルート地図へリダイレクト */
-            307: {
+            /** @description Routes API が返す徒歩経路 */
+            200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": {
+                        encodedPolyline: string;
+                    };
+                };
             };
-            /** @description 座標または地図用 API キーが不正・未設定 */
+            /** @description 座標または Routes API キーが不正・未設定 */
             400: {
                 headers: {
                     [name: string]: unknown;
@@ -804,6 +800,13 @@ export interface operations {
                         message?: string;
                     };
                 };
+            };
+            /** @description Routes API が経路を返せなかった */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
